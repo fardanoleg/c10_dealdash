@@ -7,16 +7,20 @@ header {
 }
 
 #business_name {
-    font-size: 3em;
+    font-size: 1.5em;
     color: white;
     font-weight: bold;
     width: 100vw;
     background-color: #32CD32;
+}
 
+#business_name p {
+    font-size: 1.5em;
+    line-height: 75%;
 }
 
 main {
-    height: 75vh;
+    height: 70vh;
 }
 
 #countdown_timer {
@@ -32,15 +36,11 @@ width: 100%;
 font-size: 2em;
 }
 
-#deal_info h5 {
-border: 1px solid black;
-}
-
 .business_img {
     width: 30%;
     height: 30%;
     display: inline;
-    margin-top: 3%;
+    margin-top: 2%;
     border: 1px solid black;
 }
 
@@ -60,7 +60,7 @@ main button {
     font-size: 1.3em;
     padding: 2%;
     border-radius: 5%;
-    margin-top: 5%;
+    margin-top: 3%;
     font-weight: bold;
     color: white;
 }
