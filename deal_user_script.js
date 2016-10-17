@@ -7,7 +7,7 @@ landford_lunchbox.addy="123 main";
 landford_lunchbox.phn="310.355.1370";
 landford_lunchbox.yelp="http://#.com";
 landford_lunchbox.fbook="http://#.com";
-landford_lunchbox.deal="25% Off Loose Meat Sandwiches";
+landford_lunchbox.deal="25% Off All Sandwiches";
 
 
 var app = angular.module('userDeal', []);
@@ -17,3 +17,4 @@ app.controller('messageController', function () {
     this.phn = landford_lunchbox.phn;
 });
 
+//todo % off instead of txt & # of users can take the offer , how many accepted, start date/exp date

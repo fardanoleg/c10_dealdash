@@ -1,0 +1,57 @@
+body {
+    text-align: center;
+}
+
+header {
+    /*border: 1px solid black;*/
+    font-size: 4em;
+    font-weight: bold;
+    height: 15vh;
+    color: white;
+    background-color: #32CD32;
+}
+
+main {
+    /*border: 1px solid blue;*/
+    height: 65vh;
+}
+
+button {
+    font-weight: bold;
+    font-size: 3em;
+    border: 2px solid #32CD32;
+    margin-top: 2%;
+    width: 30%;
+    background-color: white;
+
+}
+
+input {
+    font-weight: bold;
+    border: 2px solid #32CD32;
+    font-size: 1em;
+    width: 45%;
+}
+
+#expiration {
+    margin-top: 5%;
+    font-weight: bold;
+    font-size: 3em;
+}
+
+
+footer {
+    /*border: 1px solid red;*/
+    height: 15vh;
+    background-color: #32CD32;
+}
+
+footer a {
+    font-weight: bold;
+    font-size: 3em;
+    color: white;
+}
+
+footer button {
+    width: 40%
+}
