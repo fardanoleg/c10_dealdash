@@ -3,21 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>User Index</title>
+
     <link rel="stylesheet" type="text/css" href="index_user_style.css">
+
 </head>
 <body>
 <header>
     <div id="index_app_name">
-<p>Deal Dash</p>
-        </div>
+        <p>Deal Dash</p>
+    </div>
 </header>
 <main>
-    <h2>Find Restaurant Deals In Your Area Now</h2>
-    <div id="index_user_main_container">
-        <img src="images/placeholder_image.png">
-    </div>
-    <button type="button" id="index_user_search">Search</button>
-
+    <div id = "info"></div>
+    <!--<i>Latitude: </i><i id="startLat"></i><i> / Longitude: </i><i id="startLon"></i>-->
+    <h3>Find Deals in Your Area Now!</h3>
+    <div id="map"></div>
+    <button type="button" id="index_user_search" onclick="location.href = 'deal_user.html' ">Search</button>
 </main>
 <footer>
     <button type="button" id="index_user_settings">Settings</button>
@@ -26,5 +27,8 @@
     <br>
     <a href="#">[ Business Login ]</a>
 </footer>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+<script src="index_user_script.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCaQFUJYfRkQlrcGW1yW283j2uTl88RY4E&callback=initMap"></script>
 </body>
 </html>

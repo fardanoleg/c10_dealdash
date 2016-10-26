@@ -7,20 +7,16 @@ header {
 }
 
 #business_name {
-    font-size: 1.5em;
+    font-size: 3em;
     color: white;
     font-weight: bold;
     width: 100vw;
     background-color: #32CD32;
-}
 
-#business_name p {
-    font-size: 1.5em;
-    line-height: 75%;
 }
 
 main {
-    height: 70vh;
+    height: 75vh;
 }
 
 #countdown_timer {
@@ -32,15 +28,19 @@ main {
 }
 
 #deal_info {
-width: 100%;
-font-size: 2em;
+    width: 100%;
+    font-size: 2em;
+}
+
+#deal_info h5 {
+    border: 1px solid black;
 }
 
 .business_img {
     width: 30%;
     height: 30%;
     display: inline;
-    margin-top: 2%;
+    margin-top: 3%;
     border: 1px solid black;
 }
 
@@ -55,24 +55,22 @@ font-size: 2em;
     padding-top: 2%;
 }
 
-
 main button {
     font-size: 1.3em;
     padding: 2%;
     border-radius: 5%;
-    margin-top: 3%;
+    margin-top: 5%;
     font-weight: bold;
     color: white;
 }
 
-#accept{
+#accept {
     background-color: #32CD32;
 }
 
 #decline {
     background-color: darkred;
 }
-
 
 #user_settings {
     font-size: 2em;
@@ -89,4 +87,15 @@ footer a {
     font-size: 2em;
     font-weight: bold;
     color: #32CD32;
+}
+
+#pics {
+    height: 100%;
+    width: 100%;
+    border-color: red;
+}
+
+#map {
+    height: 100%;
+    width: 100%;
 }

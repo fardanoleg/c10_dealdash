@@ -1,41 +1,52 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="userDeal">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, user-scalable=no">
     <title>Deal Found</title>
     <link rel="stylesheet" type="text/css" href="deal_user_style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
-    <script src="deal_user_script.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js"></script>
+    <script src="http://code.angularjs.org/1.3.15/angular-route.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.5.0/firebase.js"></script>
+    <!--<script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.js"></script>-->
 </head>
-<body  ng-controller="messageController as mc">
+<body ng-controller="tableController as tc">
 <header>
-    <div id="business_name" ng-model="mc.name">
-        <h1>{{ mc.name }}</h1>
-        <p>{{ mc.phn }}</p>
+    <div id="business_name">
+        <p>Food Shack</p>
     </div>
 </header>
-<main>
-    <div id="deal_info">
-        <h2 id="deal_text" ng-model="mc.message">
-            {{ mc.message }}
-        </h2>
+<main >
+    <div id="map"></div>
+    <div ng-repeat="marker in markers">{{marker.markers}}</div>
+    <div id="deal_info" ng-repeat="(key,s) in tc.dealArray">
+        <!--<h5>-->
+        <!--{{s.city}}-->
+        <!--</h5>-->
+        <!--<div id="business_info">-->
+        <!--<img class="business_img" src="images/placeholder_image.png">-->
+        <!--<img class="business_img" src="images/placeholder_image.png">-->
+        <!--<img class="business_img" src="images/placeholder_image.png">-->
+        <!--</div>-->
+        <!--<div id="social_media">-->
+        <!--<a href="#"><img src="images/yelp_icon.png"></a>-->
+        <!--<a href="#"><img src="images/facebook_icon.jpg"></a>-->
+        <!--</div>-->
+        <!--<p id="countdown_timer">Offer Expires in: 2m 59s</p>-->
+        <!--<button type="button" id="accept" ng-click="tc.acceptClicked(key,s)">Accept Offer</button>-->
+        <!--<button type="button" id="decline">Decline Offer</button>-->
 
-        <div id="business_info">
-            <img class="business_img" src="images/placeholder_image.png">
-            <img class="business_img" src="images/placeholder_image.png">
-            <img class="business_img" src="images/placeholder_image.png">
-        </div>
-        <div id="social_media">
-            <a href="#"><img src="images/yelp_icon.png"></a>
-            <a href="#"><img src="images/facebook_icon.jpg"></a>
-        </div>
-        <p id="countdown_timer">Offer Expires in: 2m 59s</p>
-        <button type="button" id="accept">Accept Offer</button>
-        <button type="button" id="decline">Decline Offer</button>
     </div>
 </main>
 <footer>
     <button type="button" id="user_settings">Settings</button>
 </footer>
+<script src="dealApp.js"></script>
+<script src="script.js"></script>
+<script src="tableController.js"></script>
+<!--<script src="http://rawgit.com/angular-ui/angular-google-maps/2.0.X/dist/angular-google-maps.js"></script>-->
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCaQFUJYfRkQlrcGW1yW283j2uTl88RY4E&callback=initMap"></script>
 </body>
 </html>

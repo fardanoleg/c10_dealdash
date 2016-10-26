@@ -6,7 +6,6 @@ header {
     /*border: 1px solid black;*/
     height: 15vh;
     background-image: url("images/green_ribbon.png");
-    background-repeat: no-repeat;
     background-position: center;
     position: relative;
 }
