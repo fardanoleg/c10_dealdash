@@ -22,7 +22,7 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
         startPos = position;
         uluru.lat = startPos.coords.latitude;
         uluru.lng = startPos.coords.longitude;
-        console.log("skdjhfksjhdfkjhsd")
+
     };
     navigator.geolocation.getCurrentPosition(geoSuccess);
 
@@ -36,6 +36,7 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
     server.selectDealName = {};
     server.selectDealAdress = {};
     server.selectDealPhone = {};
+    server.selectedDealId = {};
 
     server.currentDeal = function (index) {
         console.log('currentDeal running: ', index);
@@ -95,12 +96,34 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
             console.log('ArrayAAAAA:', tempArray);
             console.log('key: ', key);
             buzDeal = this.dealArray[key].location;
-            addMarker(key)
+            console.log("BUZZ LAT "+buzDeal.lat);
+            test = key;
+            distance(uluru.lat, uluru.lng, buzDeal.lat, buzDeal.lng);
 
         }
 
         var buzDeal = {};
+        var test = null;
 
+
+        function distance(uLat1, uLon1, bLat2, bLon2) {
+
+            //this function compares the distance between the business and user based on lat/lng
+            var radlat1 = Math.PI * uLat1 / 180;
+            var radlat2 = Math.PI * bLat2 / 180;
+            var theta = uLon1 - bLon2;
+            var radtheta = Math.PI * theta / 180;
+            var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+
+            dist = Math.acos(dist);
+            dist = dist * 180 / Math.PI;
+            dist = dist * 60 * 1.1515;
+
+            if (dist <= miles) {
+                console.log("searching for deals within " + miles + " mile(s) or less");
+                addMarker(test);
+            }
+        }
 
         function addMarker(dealKey) {
             console.log("Running add Marker to the map");

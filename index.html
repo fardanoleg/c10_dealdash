@@ -12,10 +12,6 @@
 </head>
 <body ng-controller="tableController as tc">
 <header>
-    <button type="button" id="distance1" onclick="clickMileSearch(1)">1 Mile</button>
-    <button type="button" id="distance3" onclick="clickMileSearch(3)">3 Miles</button>
-    <button type="button" id="distance5" onclick="clickMileSearch(5)">5 Miles</button>
-    <input type="text" id="distanceCustom" name="distanceCustom"><input type="button" value="Submit" onclick="clickMileSearch(document.getElementById('distanceCustom').value)">
 
 </header>
 <main>
@@ -28,8 +24,15 @@
     <div class="businessInfo">Bussiness Name: {{tc.selectedDealName}}</div>
     <div class="businessInfo">Adress: {{tc.selectedDealAdress}}</div>
     <div class="businessInfo">Phone: {{tc.selectedDealPhone}}</div>
-    <button class="buttonClick">Accept</button>
-    <button class="buttonClick">Decline</button>
+    <button class="buttonClick" ng-click="tc.acceptClicked()">Accept</button>
+    <button class="buttonClick" ng-click="tc.declineClicked()">Decline</button>
+    <div>
+        <button type="button" id="distance1" onclick="clickMileSearch(1)">1 Mile</button>
+        <button type="button" id="distance3" onclick="clickMileSearch(3)">3 Miles</button>
+        <button type="button" id="distance5" onclick="clickMileSearch(5)">5 Miles</button>
+        <input type="text" id="distanceCustom" name="distanceCustom"><input type="button" value="Submit" onclick="clickMileSearch(document.getElementById('distanceCustom').value)">
+
+    </div>
 </footer>
 <script src="dealApp.js"></script>
 <script src="script.js"></script>

@@ -12,12 +12,21 @@ app.controller("tableController", function (myFactory, $log, $scope) {
         })
     };
 
-    this.acceptClicked = function (index) {
-        console.log("accept was clicked with index:", index);
-        myFactory.currentDeal(index);
-        myFactory.updateData(index);
-
+    this.acceptClicked = function () {
+        var currentDeal = this.selectedDealId;
+        console.log("CurrentDEal: ", currentDeal);
+        // console.log("accept was clicked with index:", index);
+        confirm("Are you sure you want to accept the deal?");
+        if (confirm) {
+            myFactory.currentDeal(currentDeal);
+            myFactory.updateData(currentDeal);
+        }
     };
+
+    this.declineClicked = function (index) {
+        console.log("decline was clicked with index: ", index);
+    };
+
     Object.defineProperty(this, "selectedDealName", {
         get: function () {
             console.log("get selected deal");
@@ -35,5 +44,12 @@ app.controller("tableController", function (myFactory, $log, $scope) {
             console.log("get selected deal");
             return myFactory.selectedDealPhone;
         }
-    })
+    });
+    Object.defineProperty(this, "selectedDealId", {
+
+        get: function () {
+            console.log("get selected deal Id");
+            return myFactory.selectedDealId;
+        }
+    });
 });
