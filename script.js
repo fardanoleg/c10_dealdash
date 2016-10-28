@@ -1,9 +1,9 @@
-app.factory("myFactory", function ($http, $log, $q) {
+app.factory("myFactory", function ($http, $log, $q, $timeout) {
     var server = {};
     var map;
     var indexString = null;
-    // server.dealArray = [];
     $log.info(server.dealArray);
+
     var config = {
         apiKey: "AIzaSyBzjXjba7aeBAdup78ENXxmD_Qi8OmSWGQ",
         authDomain: "dealapp-bf461.firebaseapp.com",
@@ -11,30 +11,31 @@ app.factory("myFactory", function ($http, $log, $q) {
         storageBucket: "dealapp-bf461.appspot.com",
         messagingSenderId: "1029357138612"
     };
+
     firebase.initializeApp(config);
     var fbRef = firebase.database();
 
 
+    //the geoSuccess function determines the user's location.
+    var startPos;
     var geoSuccess = function (position) {
         startPos = position;
         uluru.lat = startPos.coords.latitude;
         uluru.lng = startPos.coords.longitude;
-
+        console.log("skdjhfksjhdfkjhsd")
     };
     navigator.geolocation.getCurrentPosition(geoSuccess);
 
-//this is the user's location
+//this object stores the user's location (lat/lng) for use in other functions
     var uluru = {
         lat: null,
         lng: null
     };
 
-//this contains the lat/lng coordinates for the viewport,
-//which is set in the initMap function. This updates
-//when the map is moved.
-    var ne = null;
-    var sw = null;
 
+    server.selectDealName = {};
+    server.selectDealAdress = {};
+    server.selectDealPhone = {};
 
     server.currentDeal = function (index) {
         console.log('currentDeal running: ', index);
@@ -50,97 +51,82 @@ app.factory("myFactory", function ($http, $log, $q) {
         updates['biz/' + index + '/code'] = codeString;
         fbRef.ref().update(updates);
     };
-    server.initMap = function () {
+
+
+    //this holds the value of the map zoom, the value is changed when a non-custom search button is clicked.
+    //increments; 20 = buildings, 15 = streets, 10 = city
+    var setZoom = 11;
+
+    //this sets the search range, default is null, so no businesses will show up until the search button is clicked.
+    var miles = null;
+
+    //distanceSearch is passed into the function when the search button is clicked.
+    clickMileSearch = function (distanceSearch) {
+        miles = distanceSearch;
+        //these conditionals set the search range, which are used by the distance function.
+        if (distanceSearch == 1) {
+            setZoom = 15;
+            console.log("miles: "+miles+" setZoom: "+setZoom)
+        }
+        else if (distanceSearch == 3) {
+            setZoom = 12;
+            console.log("miles: "+miles+" setZoom: "+setZoom)
+        }
+        else if (distanceSearch == 5) {
+            setZoom = 11;
+            console.log("miles: "+miles+" setZoom: "+setZoom)
+        }
+        else {
+            setZoom = 11;
+            console.log("miles: "+miles+" setZoom: "+setZoom)
+        }
+        server.initMap();
+    };
+
+    server.initMap = function () {                   //initiate a map
         console.log("RUNNING factory INIT:");
         // var uluru = {lat: 33.637290, lng: -117.739515};
+        var tempArray = this.dealArray;
         map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 11,                                                ///distance
+            zoom: setZoom,                                                ///distance
             center: uluru
         });
-        // for (var j = 0; j < this.dealArray.length; j++) {
-        //     console.log("Array length: ", this.dealArray);
-        //     addMarker(j);
-        // }
-        for (var key in this.dealArray) {
-            // console.log('key: ', this.dealArray[key].location);
-            var buzDeal = this.dealArray[key].location;
-            // console.log(buzDeal);
-            addMarker(buzDeal)
+        for (var key in tempArray) {
+            console.log('ArrayAAAAA:', tempArray);
+            console.log('key: ', key);
+            buzDeal = this.dealArray[key].location;
+            addMarker(key)
+
         }
 
-        function addMarker(buzDeal) {
-            console.log("Running add Marker to the map", buzDeal);
-            // console.log("CHECKKK: ", buzDeal.lng);
+        var buzDeal = {};
+
+
+        function addMarker(dealKey) {
+            console.log("Running add Marker to the map");
             var marker = new google.maps.Marker({
-                position: new google.maps.LatLng(buzDeal.lat, buzDeal.lng),
-                // icon: 'https://maps.google.com/mapfiles/kml/shapes/snack_bar.png',
-                map: map
+                position: new google.maps.LatLng(tempArray[dealKey].location.lat, tempArray[dealKey].location.lng),
+                map: map,
+                animation: google.maps.Animation.DROP,
+                title: key
+            });
+            google.maps.event.addListener(marker, 'click', function () {
+                $timeout(function () {
+                    server.selectedDealName = tempArray[dealKey].biz_name;
+                    server.selectedDealAdress = tempArray[dealKey].street + " " + tempArray[dealKey].city;
+                    server.selectedDealPhone = tempArray[dealKey].phone;
+                }, 0);
             })
-            console.log(marker);
         }
-    }
-//     $scope.markers = [];
-    //     var uluru = {lat: 33.637290, lng: -117.739515};
-    //
-    //     var map = new google.maps.Map(document.getElementById('map'), {
-    //         zoom: 20, ///distance
-    //         center: uluru,
-    //         mapTypeId: google.maps.MapTypeId.TERRAIN
-    //     });
-    //     for (var i = 0; i < this.dealArray.length; i++) {
-    //         console.log(" THIS DEAL Array : ", this.dealArray);
-    //         addMarker(i);
-    //     }
-    //
-    //     function addMarker(buzDeal) {
-    //         console.log("addMarker running:")
-    //         var marker = new google.maps.Marker({
-    //             position: {lat: this.dealArray[buzDeal].location.lat, lng: this.dealArray[buzDeal].location.lng},
-    //             icon: 'https://maps.google.com/mapfiles/kml/shapes/snack_bar.png',
-    //             map: map
-    //         });
-    //         $scope.markers.push(marker);
-    //         console.log("Markers ARRAY: ", $scope.markers);
-    //     }
-    // }
-    // var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
-    // var icons = {
-    //     food: {
-    //         icon: iconBase + 'snack_bar.png'
-    //     },
-    //     person: {
-    //         icon: iconBase + 'man.png'
-    //     }
-    // };
-
-    // function addMarker(feature) {
-    //     var marker = new google.maps.Marker({
-    //         position: feature.position,
-    //         icon: icons[feature.type].icon,
-    //         map: map
-    //     });
-    // }
-    // var features =[
-    //     {
-    //         position: new google.maps.LatLng(33.636223, -117.739499),
-    //         type:'food'
-    //     }, {
-    //         position: new google.maps.LatLng(33.636201, -117.739440),
-    //         type: 'man'
-    //     }
-    // ];
-    // for (var i=0, features; features = features[i]; i++){
-    //     addMarker(features);
-    // }
-
+    };
 
     server.getData = function () {
         var defer = $q.defer();
         fbRef.ref('biz').on('value', function (snapshot) {
                 defer.resolve(snapshot.val());
                 server.dealArray = snapshot.val();
-                // for (var currentBiz in biz)
                 console.log("data from the firebase: ", server.dealArray);
+                server.initMap();
             }
         );
         return defer.promise

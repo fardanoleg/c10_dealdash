@@ -1,15 +1,16 @@
 app.controller("tableController", function (myFactory, $log, $scope) {
+    console.log('tableTriggered');
     var self = this;
     this.dealArray = {};
-    this.getData = function () {
+    this.getData = function (index) {
+        console.log(index);
         myFactory.getData().then(function (response) {
             console.log("Response: ", response);
             self.dealArray = response;
             console.log("DEal Array: ", self.dealArray);
-            self.initMap();
+            // self.initMap();
         })
     };
-    this.getData();
 
     this.acceptClicked = function (index) {
         console.log("accept was clicked with index:", index);
@@ -17,11 +18,22 @@ app.controller("tableController", function (myFactory, $log, $scope) {
         myFactory.updateData(index);
 
     };
-
-    this.initMap = function () {
-        console.log("RUNNNING controller INIT:");
-        myFactory.initMap();
-    };
-    // this.initMap();
-
+    Object.defineProperty(this, "selectedDealName", {
+        get: function () {
+            console.log("get selected deal");
+            return myFactory.selectedDealName;
+        }
+    });
+    Object.defineProperty(this, "selectedDealAdress", {
+        get: function () {
+            console.log("get selected deal");
+            return myFactory.selectedDealAdress;
+        }
+    });
+    Object.defineProperty(this, "selectedDealPhone", {
+        get: function () {
+            console.log("get selected deal");
+            return myFactory.selectedDealPhone;
+        }
+    })
 });

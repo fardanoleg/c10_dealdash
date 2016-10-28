@@ -1,0 +1,81 @@
+body {
+    text-align: center;
+}
+
+header {
+    height: 5%;
+    color: white;
+    background-color: #32CD32;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+main {
+    height: 70vh;
+}
+
+footer {
+    height: 5vh;
+    text-align: center;
+}
+
+#distanceCustom,
+button {
+    font-size: 1em;
+    padding: 2%;
+    background-color: #32CD32;
+    border-radius: 5%;
+    font-weight: bold;
+    color: white;
+    margin: 1% 0 0 0;
+}
+
+#startBtn {
+    margin-top: 25%
+}
+
+#distanceCustom {
+    width: 7vh;
+    background-color: white;
+    color: black;
+}
+
+#businesses {
+    padding: 1%;
+    margin: 3%;
+    background-color: white;
+    color: black;
+}
+
+
+#map {
+    height: 100%;
+    width: 100%;
+}
+
+.bottomWindow {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#inputMiles {
+    width: 4%;
+}
+
+
+
+#map {
+    height: 100%;
+    width: 100%;
+}
+
+.bottomWindow {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#inputMiles {
+    width: 4%;
+}

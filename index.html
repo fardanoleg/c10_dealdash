@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, user-scalable=no">
+    <title>Deal Found</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js"></script>
+    <script src="http://code.angularjs.org/1.3.15/angular-route.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.5.0/firebase.js"></script>
+</head>
+<body ng-controller="tableController as tc">
+<header>
+    <button type="button" id="distance1" onclick="clickMileSearch(1)">1 Mile</button>
+    <button type="button" id="distance3" onclick="clickMileSearch(3)">3 Miles</button>
+    <button type="button" id="distance5" onclick="clickMileSearch(5)">5 Miles</button>
+    <input type="text" id="distanceCustom" name="distanceCustom"><input type="button" value="Submit" onclick="clickMileSearch(document.getElementById('distanceCustom').value)">
+
+</header>
+<main>
+    <div id="map">
+        <button ng-click="tc.getData()" id="startBtn">Find Local Deal Now</button>
+    </div>
+
+</main>
+<footer>
+    <div class="businessInfo">Bussiness Name: {{tc.selectedDealName}}</div>
+    <div class="businessInfo">Adress: {{tc.selectedDealAdress}}</div>
+    <div class="businessInfo">Phone: {{tc.selectedDealPhone}}</div>
+    <button class="buttonClick">Accept</button>
+    <button class="buttonClick">Decline</button>
+</footer>
+<script src="dealApp.js"></script>
+<script src="script.js"></script>
+<script src="tableController.js"></script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCaQFUJYfRkQlrcGW1yW283j2uTl88RY4E&callback=initMap"></script>
+</body>
+</html>
