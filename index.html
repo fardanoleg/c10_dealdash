@@ -12,32 +12,30 @@
 </head>
 <body ng-controller="tableController as tc">
 <header>
-
+<div id="headerDeal">Shake the deal</div>
 </header>
 <main>
-    <div id="map">
-        <button ng-click="tc.getData()" id="startBtn">Find Local Deal Now</button>
+    <div id="map" init>
+        <!--<button ng-click="tc.getData()" id="startBtn">Find Local Deal Now</button>-->
     </div>
-
 </main>
+<div class="businessInfo">Bussiness Name: {{tc.selectedDealName}}</div>
+<div class="businessInfo">Adress: {{tc.selectedDealAdress}}</div>
+<div class="businessInfo">Phone: {{tc.selectedDealPhone}}</div>
+<button class="buttonClick" ng-click="tc.acceptClicked()">Accept</button>
+<button class="buttonClick" ng-click="tc.declineClicked()">Decline</button>
+<div>
+    <button type="button" id="distance1" ng-click="tc.clickMileSearch(1)">1 Mile</button>
+    <button type="button" id="distance3" ng-click="tc.clickMileSearch(3)">3 Miles</button>
+    <button type="button" id="distance5" ng-click="tc.clickMileSearch(5)">5 Miles</button>
+    <input type="text" id="distanceCustom" name="distanceCustom"><input type="button" value="Submit" ng-click="tc.clickMileSearch(document.getElementById('distanceCustom').value)">
+</div>
 <footer>
-    <div class="businessInfo">Bussiness Name: {{tc.selectedDealName}}</div>
-    <div class="businessInfo">Adress: {{tc.selectedDealAdress}}</div>
-    <div class="businessInfo">Phone: {{tc.selectedDealPhone}}</div>
-    <button class="buttonClick" ng-click="tc.acceptClicked()">Accept</button>
-    <button class="buttonClick" ng-click="tc.declineClicked()">Decline</button>
-    <div>
-        <button type="button" id="distance1" onclick="clickMileSearch(1)">1 Mile</button>
-        <button type="button" id="distance3" onclick="clickMileSearch(3)">3 Miles</button>
-        <button type="button" id="distance5" onclick="clickMileSearch(5)">5 Miles</button>
-        <input type="text" id="distanceCustom" name="distanceCustom"><input type="button" value="Submit" onclick="clickMileSearch(document.getElementById('distanceCustom').value)">
 
-    </div>
 </footer>
 <script src="dealApp.js"></script>
 <script src="script.js"></script>
 <script src="tableController.js"></script>
-<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCaQFUJYfRkQlrcGW1yW283j2uTl88RY4E&callback=initMap"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCaQFUJYfRkQlrcGW1yW283j2uTl88RY4E&callback=initMap"></script>
 </body>
 </html>

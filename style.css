@@ -1,21 +1,27 @@
 body {
     text-align: center;
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
 }
 
-header {
-    height: 5%;
+header{
+    height: 7%;
     color: white;
     background-color: #32CD32;
-    font-size: 1em;
+    font-size: 3em;
     font-weight: bold;
+    margin: 0;
+    padding: 0;
 }
 
 main {
-    height: 70vh;
+    height: 73%;
 }
 
 footer {
-    height: 5vh;
+    height: 10%;
     text-align: center;
 }
 
@@ -30,9 +36,9 @@ button {
     margin: 1% 0 0 0;
 }
 
-#startBtn {
-    margin-top: 25%
-}
+/*#startBtn {*/
+/*margin-top: 25%*/
+/*}*/
 
 #distanceCustom {
     width: 7vh;
@@ -46,7 +52,6 @@ button {
     background-color: white;
     color: black;
 }
-
 
 #map {
     height: 100%;
@@ -62,8 +67,6 @@ button {
 #inputMiles {
     width: 4%;
 }
-
-
 
 #map {
     height: 100%;
