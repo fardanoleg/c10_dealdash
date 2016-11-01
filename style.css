@@ -1,28 +1,32 @@
 body {
-    text-align: center;
     height: 100vh;
     width: 100vw;
     margin: 0;
     padding: 0;
 }
 
-header{
-    height: 7%;
-    color: white;
-    background-color: #32CD32;
-    font-size: 3em;
-    font-weight: bold;
+header {
     margin: 0;
     padding: 0;
+    text-align: center;
+    height: 10%;
+    background-color: lavender;
+    font-size: 3em;
 }
 
 main {
-    height: 73%;
+    margin: 0;
+    padding: 0;
+    height: 80%;
+    text-align: center;
 }
 
 footer {
+    margin: 0;
     height: 10%;
+    padding: 0;
     text-align: center;
+    background-color: lavender;
 }
 
 #distanceCustom,
@@ -44,6 +48,10 @@ button {
     width: 7vh;
     background-color: white;
     color: black;
+}
+
+#distance1, #distance3, #distance5 {
+    height: 90%;
 }
 
 #businesses {
@@ -81,4 +89,39 @@ button {
 
 #inputMiles {
     width: 4%;
+}
+
+.frontButton {
+    position: relative;
+    top: 50%;
+    padding: 0;
+    height: 10%;
+    width: 10%;
+
+}
+
+#frontMain {
+    background-color: lightblue;
+}
+
+#frontHeader {
+    height: 17%;
+}
+
+#frontFooter {
+    height: 3%
+}
+
+.buttons {
+    text-align: center;
+
+}
+
+#newWindow {
+    position: fixed;
+    text-align: center;
+    height: 25%;
+    width: 100%;
+    bottom: 10%;
+    background-color: lightyellow;
 }
