@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body ng-app="ngAnimate">
+<header>
+    Business Control Panel
+</header>
+<main>
+    <!-- post new deal div -->
+    <button class="biz_home_btns" ng-click="toShow='post_new'">Post New</button>
+    <br>
+    <div ng-show="toShow=='post_new'">
+        <input type="text" id="newDeal" name="newDeal"><br>
+        <input id="newDealSubmit" type="button" value="Submit"
+               onclick="newDeal(document.getElementById('newDeal').value)">
+        <button class="biz_home_btns" ng-click="toShow='exit_screen'">Close</button>
+        <br>
+        <span id="new_info"></span>
+    </div>
+    <br>
+    <!-- display current deals div -->
+    <button class="biz_home_btns" ng-click="toShow='current'" onclick="currentDeal()">Current Deals</button>
+    <br>
+    <div ng-show="toShow=='current'">
+        <span id="current_info"></span>
+        <button class="biz_home_btns" ng-click="toShow='exit_screen'">Close</button>
+    </div>
+    <br>
+    <!-- display/update business info -->
+    <button class="biz_home_btns" ng-click="toShow='biz_info'" onclick="displayData()">View/Update Data</button>
+    <div ng-show="toShow=='biz_info'" id="biz_info">
+        <span id="bizName"></span><input type="checkbox" ng-model="edit" id="edit_checkbox">
+        <br>
+        <span id="street_address"></span>
+        <br>
+        <span id="city_name"></span>
+        <span id="state_of"></span>
+        <span id="zip_code"></span>
+        <br>
+        <span id="phone_num"></span>
+
+        <br>
+        <span id="change_confirmed"></span>
+        <div id="edit_biz_info" ng-show="edit">
+            <br>
+            Name:<input type="text" id="biz_name">
+            <input class="edit" type="button" value="Submit"
+                   onclick="updateData(document.getElementById('biz_name').value, 'biz_name')">
+            <br>
+            Street:<input type="text" id="street">
+            <input class="edit" type="button" value="Submit"
+                   onclick="updateData(document.getElementById('street').value, 'street')">
+            <br>
+            City: <input type="text" id="city">
+            <input class="edit" type="button" value="Submit"
+                   onclick="updateData(document.getElementById('city').value, 'city')">
+            <br>
+            State: <input type="text" id="state">
+            <input class="edit" type="button" value="Submit"
+                   onclick="updateData(document.getElementById('state').value, 'state')">
+            <br>
+            Zip: <input type="text" id="zip">
+            <input class="edit" type="button" value="Submit"
+                   onclick="updateData(document.getElementById('zip').value, 'zip')">
+            <br>
+            Phone: <input type="text" id="phone">
+            <input class="edit" type="button" value="Submit"
+                   onclick="updateData(document.getElementById('phone').value, 'phone')">
+        </div>
+        <button class="exit_button" ng-click="toShow='exit_screen'">Close</button>
+    </div>
+    <div ng-show="toShow=='exit_screen'" id="biz_info"></div>
+</main>
+<footer></footer>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js"></script>-->
+<script src="http://code.angularjs.org/1.3.15/angular-route.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.5.0/firebase.js"></script>
+<script src="biz_home.js"></script>
+</body>
+
+</html>

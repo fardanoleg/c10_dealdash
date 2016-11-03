@@ -1,28 +1,35 @@
 body {
     text-align: center;
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
 }
 
 header {
-    height: 5%;
+    height: 7%;
     color: white;
     background-color: #32CD32;
-    font-size: 1em;
+    font-size: 3em;
     font-weight: bold;
+    margin: 0;
+    padding: 0;
 }
 
 main {
-    height: 70vh;
+    height: 73%;
 }
 
 footer {
-    height: 5vh;
+    height: 10%;
     text-align: center;
 }
 
 #distanceCustom,
+    /*#newDealSubmit,*/
 button {
     font-size: 1em;
-    padding: 2%;
+    padding: 1%;
     background-color: #32CD32;
     border-radius: 5%;
     font-weight: bold;
@@ -30,9 +37,9 @@ button {
     margin: 1% 0 0 0;
 }
 
-#startBtn {
-    margin-top: 25%
-}
+/*#startBtn {*/
+/*margin-top: 25%*/
+/*}*/
 
 #distanceCustom {
     width: 7vh;
@@ -47,6 +54,20 @@ button {
     color: black;
 }
 
+#map {
+    height: 100%;
+    width: 100%;
+}
+
+.bottomWindow {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#inputMiles {
+    width: 4%;
+}
 
 #map {
     height: 100%;
@@ -63,19 +84,90 @@ button {
     width: 4%;
 }
 
-
-
-#map {
-    height: 100%;
-    width: 100%;
+#newDeal {
+    height: 5%;
+    width: 60%;
+    border: 1px solid black;
+    font-size: 2em;
+    margin-top: 1%;
+}
+#biz_info,
+#current_info,
+#new_info {
+    font-weight: bold;
+    font-size: 2em;
+    color: green;
 }
 
-.bottomWindow {
-    height: 100%;
-    margin: 0;
+#newDealSubmit,
+.biz_home_btns {
+    border: 1px solid black;
+    color: white;
+    background-color: #32CD32;
+    padding: 2%;
+    display: inline-block;
+    margin: 5% 0 5% 0;
+    font-size: 1.5em;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5%;
+}
+
+.edit {
+    background-color: white;
+    color: #32CD32;
+    font-weight: normal;
     padding: 0;
+    margin-left: 3%;
+    border: 1px solid #32CD32;
+    border-radius: 5%;
 }
 
-#inputMiles {
-    width: 4%;
+#edit_biz_info {
+    transition: all linear 0.5s;
+    background-color: transparent;
+    height: 30vh;
+    width: 100%;
+    position: relative;
+    top: 0;
+    left: 0;
+    text-align: right;
+}
+
+#edit_biz_info input {
+    font-size: 1em;
+    margin-bottom: 2%;
+    border: 1px solid black;
+}
+
+.edit_button {
+    background-color: white;
+    border: 1px solid #32CD32;
+    border-radius: 5%;
+    color: #32CD32;
+    width: 2em;
+}
+
+input[type='checkbox'] {
+    -webkit-appearance:none;
+    width:30px;
+    height:30px;
+    background:white;
+    border-radius:5px;
+    border:2px solid black;
+}
+input[type='checkbox']:checked {
+    background: #32CD32;
+}
+
+.ng-hide {
+    height: 0;
+    width: 0;
+    background-color: transparent;
+    top:-200px;
+    left: 200px;
+}
+
+#change_confirmed {
+    color: black;
 }
