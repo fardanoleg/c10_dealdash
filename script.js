@@ -49,19 +49,29 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
             server.createMap(uluru)
         };
     };
+    server.confirmWindow = false;
+    server.winnerWindow = false;
     server.newWindow = false;
     server.selectedDealName = {};
     server.selectedDealAdress = {};
     server.selectedDealPhone = {};
     server.selectedDealId = {};
     server.selectedDealStatus = {};
+    server.selectedDealCode = {};
+    server.codeString = {};
     server.currentDeal = function (index) {
         console.log('currentDeal running: ', index);
         indexString = this.dealArray[index].phone + this.dealArray[index].zip;
         console.log(indexString);
+        server.codeString = this.dealArray[index].phone + this.dealArray[index].zip;
     };
+    server.removeData = function (index) {
+        console.log("DELETING Deal from the firebase: ", index);
+        fbRef.ref('biz/' + index).remove();
+    }
 
-    server.updateData = function (index) {
+
+    server.updateData = function (index) {            // update information on the firebase
         console.log("UpdateData running");
         var updates = {};
         var codeString = indexString;
@@ -69,9 +79,7 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
         updates['biz/' + index + '/code'] = codeString;
         fbRef.ref().update(updates);
     };
-    // server.sendDealToCustomer = function(index){
-    //     console.log("Deal accepted will send it to the cutomer email");
-    // };
+
 
     //this holds the value of the map zoom, the value is changed when a non-custom search button is clicked.
     //increments; 20 = buildings, 15 = streets, 10 = city
@@ -81,19 +89,20 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
     //this sets the search range, default is null, so no businesses will show up until the search button is clicked.
     var distanceSearch;
 
-    server.initMap2 = function () {                   //initiate a map
+    server.initMap2 = function () {                   //initiate a map with the deals
         console.log("RUNNING factory INIT:");
         var tempArray = this.dealArray;
+
         if (distanceSearch == 1) {
             setZoom = 15;
             console.log("miles: " + distanceSearch + " setZoom: " + setZoom)
         }
         else if (distanceSearch == 3) {
-            setZoom = 12;
+            setZoom = 13;
             console.log("miles: " + distanceSearch + " setZoom: " + setZoom)
         }
         else if (distanceSearch == 5) {
-            setZoom = 11;
+            setZoom = 12;
             console.log("miles: " + distanceSearch + " setZoom: " + setZoom)
         }
         else {
