@@ -226,6 +226,7 @@ button {
     font-size: 2em;
     margin-top: 1%;
 }
+
 #biz_info,
 #current_info,
 #new_info {
@@ -269,6 +270,7 @@ button {
     text-align: right;
 }
 
+#create_account input,
 #edit_biz_info input {
     font-size: 1em;
     margin-bottom: 2%;
@@ -284,13 +286,14 @@ button {
 }
 
 input[type='checkbox'] {
-    -webkit-appearance:none;
-    width:30px;
-    height:30px;
-    background:white;
-    border-radius:5px;
-    border:2px solid black;
+    -webkit-appearance: none;
+    width: 30px;
+    height: 30px;
+    background: white;
+    border-radius: 5px;
+    border: 2px solid black;
 }
+
 input[type='checkbox']:checked {
     background: #32CD32;
 }
@@ -299,10 +302,66 @@ input[type='checkbox']:checked {
     height: 0;
     width: 0;
     background-color: transparent;
-    top:-200px;
+    top: -200px;
     left: 200px;
 }
 
 #change_confirmed {
     color: black;
 }
+
+#create_account {
+    font-size: 2em;
+    text-align: left;
+    padding-left: 10%;
+}
+
+#create_account #biz_name,
+#create_account #street {
+    width: 80%;
+    margin-bottom: 5%;
+}
+
+
+#create_account #city {
+    width: 60%;
+    margin-bottom: 5%;
+}
+
+
+#create_account #state {
+    width: 20%;
+    margin-bottom: 5%;
+}
+
+#create_account #zip {
+    width: 30%;
+}
+
+#create_account #phone {
+    width: 50%;
+}
+
+#confirmation_screen {
+    height: 70%;
+    color: black;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
