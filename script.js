@@ -16,40 +16,70 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
     var fbRef = firebase.database();
 
     //the geoSuccess function determines the user's location.
-//this object stores the user's location (lat/lng) for use in other functions
+    //this object stores the user's location (lat/lng) for use in other functions
     var uluru = {
         lat: null,
         lng: null
     };
-
     var startPos;
-    var geoSuccess = function (position) {
-        startPos = position;
-        uluru.lat = startPos.coords.latitude;
-        uluru.lng = startPos.coords.longitude;
+    server.createMap = function (pos) {
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: pos,
+            zoom: 11
+        });
+        var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+        var marker = new google.maps.Marker({
+            position: pos,
+            map: map,
+            animation: google.maps.Animation.DROP,
+            icon: iconBase + 'library_maps.png'
+        });
     };
-
-    navigator.geolocation.getCurrentPosition(geoSuccess);
-
+    server.initMap = function () {
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 0, lng: 0},
+            zoom: 1
+        });
+        navigator.geolocation.getCurrentPosition(geoSuccess);
+        function geoSuccess(position) {
+            startPos = position;
+            uluru.lat = startPos.coords.latitude;
+            uluru.lng = startPos.coords.longitude;
+            console.log(uluru);
+            server.createMap(uluru)
+        };
+    };
+    server.confirmWindow = false;
+    server.winnerWindow = false;
+    server.newWindow = false;
     server.selectedDealName = {};
     server.selectedDealAdress = {};
     server.selectedDealPhone = {};
     server.selectedDealId = {};
-
+    server.selectedDealStatus = {};
+    server.selectedDealCode = {};
+    server.codeString = {};
     server.currentDeal = function (index) {
         console.log('currentDeal running: ', index);
         indexString = this.dealArray[index].phone + this.dealArray[index].zip;
         console.log(indexString);
+        server.codeString = this.dealArray[index].phone + this.dealArray[index].zip;
     };
+    server.removeData = function (index) {
+        console.log("DELETING Deal from the firebase: ", index);
+        fbRef.ref('biz/' + index).remove();
+    }
 
-    server.updateData = function (index) {
+
+    server.updateData = function (index) {            // update information on the firebase
         console.log("UpdateData running");
         var updates = {};
         var codeString = indexString;
-        updates['biz/' + index + '/status'] = 'BBBBccepted';
+        updates['biz/' + index + '/status'] = 'accepted';
         updates['biz/' + index + '/code'] = codeString;
         fbRef.ref().update(updates);
     };
+
 
     //this holds the value of the map zoom, the value is changed when a non-custom search button is clicked.
     //increments; 20 = buildings, 15 = streets, 10 = city
@@ -59,19 +89,20 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
     //this sets the search range, default is null, so no businesses will show up until the search button is clicked.
     var distanceSearch;
 
-    server.initMap = function () {                   //initiate a map
+    server.initMap2 = function () {                   //initiate a map with the deals
         console.log("RUNNING factory INIT:");
         var tempArray = this.dealArray;
+
         if (distanceSearch == 1) {
             setZoom = 15;
             console.log("miles: " + distanceSearch + " setZoom: " + setZoom)
         }
         else if (distanceSearch == 3) {
-            setZoom = 12;
+            setZoom = 13;
             console.log("miles: " + distanceSearch + " setZoom: " + setZoom)
         }
         else if (distanceSearch == 5) {
-            setZoom = 11;
+            setZoom = 12;
             console.log("miles: " + distanceSearch + " setZoom: " + setZoom)
         }
         else {
@@ -81,6 +112,13 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
         map = new google.maps.Map(document.getElementById('map'), {
             zoom: setZoom,                                                ///distance
             center: uluru
+        });
+        var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+        var marker = new google.maps.Marker({
+            position: uluru,
+            map: map,
+            animation: google.maps.Animation.DROP,
+            icon: iconBase + 'library_maps.png'
         });
         console.log("ULURUUUU: ", uluru);
         for (var key in tempArray) {
@@ -93,7 +131,6 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
         }
 
         function distance(uLat1, uLon1, bLat2, bLon2) {
-
             //this function compares the distance between the business and user based on lat/lng
             var radlat1 = Math.PI * uLat1 / 180;
             var radlat2 = Math.PI * bLat2 / 180;
@@ -120,11 +157,14 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
             });
 
             google.maps.event.addListener(marker, 'click', function () {
+                console.log("Listening: ", dealKey);
+                server.newWindow = true;
                 $timeout(function () {
                     server.selectedDealName = tempArray[dealKey].biz_name;
                     server.selectedDealAdress = tempArray[dealKey].street + " " + tempArray[dealKey].city;
                     server.selectedDealPhone = tempArray[dealKey].phone;
                     server.selectedDealId = dealKey;
+                    server.selectedDealStatus = tempArray[dealKey].status;
                     // console.log("ID: ", server.selectedDealId);
                 }, 0);
             })
@@ -139,7 +179,7 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
                 console.log("data from the firebase: ", server.dealArray);
                 console.log("distanceMiles: ", this.distanceMiles);
                 distanceSearch = this.distanceMiles;
-                server.initMap();
+                server.initMap2();
             }
         );
         return defer.promise
@@ -151,5 +191,3 @@ function initMap() {
     console.log("initMap");
     angular.bootstrap($('html')[0], ['myApp']);
 }
-
-

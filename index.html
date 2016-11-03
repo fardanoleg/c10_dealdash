@@ -12,30 +12,51 @@
 </head>
 <body ng-controller="tableController as tc">
 <header>
-<div id="headerDeal">Shake the deal</div>
+    <div id="headerDeal">Shake the deal</div>
+
 </header>
 <main>
-    <div id="map" init>
-        <!--<button ng-click="tc.getData()" id="startBtn">Find Local Deal Now</button>-->
+    <div id="map">
+    </div>
+    <div id="winnerWindow" ng-init="tc.winnerWindow=false" ng-show="tc.winnerWindow">
+        Congratulation YOU WON the DEAL!!<br>
+        enter your email: <input type="text" id="emailInfo" name="emailInfo">
+        <button type="button" value="Submit" ng-click="tc.acceptWinner(document.getElementsByName('emailInfo').value)">
+            Send
+        </button>
+        <br>
+        or Remember the code:
+        <p id="showCode">{{tc.selectedDealCode}}</p>
+    </div>
+    <div id="confirmWindow" ng-init="tc.confirmWindow=false" ng-show="tc.confirmWindow">
+        Are you sure you want to accept this offer?<br>
+        <button class="confirmButton" ng-click="tc.confirmWinner()">Accept</button>
+        <button class="confirmButton" ng-click="tc.declineWinner()">Decline</button>
+    </div>
+    <div id="newWindow" ng-init="tc.newWindow=false" ng-show="tc.newWindow">
+        <p id="d_info">Deal INFORMATION:</p>
+        <button id="buttonClickYes" ng-click="tc.acceptClicked()">YES</button>
+        <div id="dealInfo">
+            <div class="businessInfo">Bussiness Name: {{tc.selectedDealName}}</div>
+            <div class="businessInfo">Adress: {{tc.selectedDealAddress}}</div>
+            <div class="businessInfo">Phone: {{tc.selectedDealPhone}}</div>
+            <div class="businessInfo">Deal Details: {{tc.selectedDealInfo}}</div>
+            <div class="businessInfo">Review: {{tc.selectedYelpReview}}</div>
+        </div>
+        <button id="buttonClickNo" ng-click="tc.declineClicked()">NO</button>
     </div>
 </main>
-<div class="businessInfo">Business Name: {{tc.selectedDealName}}</div>
-<div class="businessInfo">Address: {{tc.selectedDealAdress}}</div>
-<div class="businessInfo">Phone: {{tc.selectedDealPhone}}</div>
-<button class="buttonClick" ng-click="tc.acceptClicked()">Accept</button>
-<button class="buttonClick" ng-click="tc.declineClicked()">Decline</button>
-<div>
+<footer class="buttons">
     <button type="button" id="distance1" ng-click="tc.clickMileSearch(1)">1 Mile</button>
     <button type="button" id="distance3" ng-click="tc.clickMileSearch(3)">3 Miles</button>
     <button type="button" id="distance5" ng-click="tc.clickMileSearch(5)">5 Miles</button>
-    <input type="text" id="distanceCustom" name="distanceCustom"><input type="button" value="Submit" ng-click="tc.clickMileSearch(document.getElementById('distanceCustom').value)">
-</div>
-<footer>
-
+    <input type="text" id="distanceCustom" name="distanceCustom"><input type="button" value="Submit"
+                                                                        ng-click="tc.clickMileSearch(document.getElementById('distanceCustom').value)">
 </footer>
 <script src="dealApp.js"></script>
 <script src="script.js"></script>
 <script src="tableController.js"></script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCaQFUJYfRkQlrcGW1yW283j2uTl88RY4E&callback=initMap"></script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCaQFUJYfRkQlrcGW1yW283j2uTl88RY4E&callback=initMap"></script>
 </body>
 </html>
