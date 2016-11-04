@@ -3,6 +3,7 @@ body {
     width: 100vw;
     margin: 0;
     padding: 0;
+    font-family: sans-serif;
 }
 
 header {
@@ -36,7 +37,6 @@ button {
     background-color: lavender;
     border-radius: 5%;
     font-weight: bold;
-    color: green;
     margin: 1% 0 0 0;
 }
 
@@ -269,14 +269,13 @@ button {
 #new_info {
     font-weight: bold;
     font-size: 2em;
-    color: green;
+    color: black;
 }
 
 #newDealSubmit,
 .biz_home_btns {
     border: 1px solid black;
-    color: white;
-    background-color: #32CD32;
+    background-color: lavender;
     padding: 2%;
     display: inline-block;
     margin: 5% 0 5% 0;
@@ -288,11 +287,11 @@ button {
 
 .edit {
     background-color: white;
-    color: #32CD32;
+    color: black;
     font-weight: normal;
     padding: 0;
     margin-left: 3%;
-    border: 1px solid #32CD32;
+    border: 1px solid black;
     border-radius: 5%;
 }
 
@@ -316,9 +315,8 @@ button {
 
 .edit_button {
     background-color: white;
-    border: 1px solid #32CD32;
+    border: 1px solid black;
     border-radius: 5%;
-    color: #32CD32;
     width: 2em;
 }
 
@@ -329,10 +327,12 @@ input[type='checkbox'] {
     background: white;
     border-radius: 5px;
     border: 2px solid black;
+    margin-left: 10%;
 }
 
 input[type='checkbox']:checked {
-    background: #32CD32;
+    background: darkblue;
+
 }
 
 .ng-hide {
@@ -345,6 +345,7 @@ input[type='checkbox']:checked {
 
 #change_confirmed {
     color: black;
+    font-size: 1em;
 }
 
 #create_account {
@@ -384,7 +385,12 @@ input[type='checkbox']:checked {
     color: black;
 }
 
-
+.redeemBtn {
+    color: black;
+    padding: 0;
+    font-size: .8em;
+    margin-left: 5%;
+}
 
 
 

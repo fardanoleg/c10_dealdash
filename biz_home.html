@@ -20,8 +20,6 @@
                        document.getElementById('newDeal').value,
                        document.getElementById('newDealQty').value
                )">
-
-
         <button class="biz_home_btns" ng-click="toShow='exit_screen'">Close</button>
         <br>
         <span id="new_info"></span>
@@ -38,7 +36,7 @@
     <!-- display/update business info ------------------------------------------------------------------------------>
     <button class="biz_home_btns" ng-click="toShow='biz_info'" onclick="displayData()">View/Update Data</button>
     <div ng-show="toShow=='biz_info'" id="biz_info">
-        <span id="bizName"></span><input type="checkbox" ng-model="edit" id="edit_checkbox">
+        <span id="bizName"></span>
         <br>
         <span id="street_address"></span>
         <br>
@@ -46,8 +44,8 @@
         <span id="state_of"></span>
         <span id="zip_code"></span>
         <br>
-        <span id="phone_num"></span>
-
+        <span id="phone_num"></span><br>
+        <input type="checkbox" ng-model="edit" id="edit_checkbox"><em>edit</em>
         <br>
         <span id="change_confirmed"></span>
         <div id="edit_biz_info" ng-show="edit">
@@ -79,16 +77,18 @@
         <button class="exit_button" ng-click="toShow='exit_screen'">Close</button>
     </div>
     <div ng-show="toShow=='exit_screen'" id="biz_info"></div>
+    <br>
+    <!-------------- Redeem --------------------------------->
+    <button class="biz_home_btns" ng-click="toShow='biz_info'" onclick="displayData()">View/Update Data</button>
+    <div ng-show="toShow=='biz_info'" id="biz_info">
 
 </main>
 <footer></footer>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js"></script>-->
 <script src="http://code.angularjs.org/1.3.15/angular-route.js"></script>
 <script src="https://www.gstatic.com/firebasejs/3.5.0/firebase.js"></script>
 <script src="biz_home.js"></script>
 </body>
-
 </html>
