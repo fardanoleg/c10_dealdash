@@ -62,7 +62,7 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
             position: pos,
             map: map,
             animation: google.maps.Animation.DROP,
-            icon: iconBase + 'library_maps.png'
+            icon: iconBase + "man.png"
         });
     };
     var directionsDisplay;
@@ -120,7 +120,9 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
     var setZoom = 11;
     var buzDeal = {};
     var test;
-
+    server.removeDirection = function () {
+        directionsDisplay.setDirections({routes: []});
+    };
     var distanceSearch;
 
     server.initMap2 = function () {                   //initiate a map with the deals
@@ -144,8 +146,7 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
             console.log("miles: " + distanceSearch + " setZoom: " + setZoom)
         }
         var rendererOptions = {   //create object for Renders to make it non-changeble
-            // map: map,
-            // draggable: true
+            suppressMarkers: true,
             preserveViewport: true
         };
 
@@ -164,7 +165,7 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
             position: uluru,
             map: map,
             animation: google.maps.Animation.DROP,
-            icon: iconBase + 'library_maps.png'
+            icon: iconBase + "man.png"
         });
         console.log("ULURUUUU: ", uluru);
         for (var key in tempArray) {
@@ -195,6 +196,7 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
 
         function addMarker(dealKey) {
             console.log("Running add Marker to the map");
+
             var marker = new google.maps.Marker({
                 position: new google.maps.LatLng(tempArray[dealKey].location.lat, tempArray[dealKey].location.lng),
                 map: map,
