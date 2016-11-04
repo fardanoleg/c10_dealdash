@@ -239,5 +239,3 @@ function initMap() {            //load myApp after the index page loaded
     console.log("initMap");
     angular.bootstrap($('html')[0], ['myApp']);
 }
-
-

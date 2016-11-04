@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body ng-app="ngAnimate">
+<header id="sign_up">
+    Sign Up!
+</header>
+<main>
+
+    <!-- create business account -->
+    <div id="create_account">
+        <div ng-hide="toHide=='creation_confirmation'">
+            <form id="frm1">
+            <br>
+            <input type="text" id="biz_name" placeholder="Business Name">
+
+            <br>
+            <input type="text" id="street" placeholder="Street Address">
+
+            <br>
+            <input type="text" id="city" placeholder="City" style="width: 60%;">
+            <input type="text" id="state" placeholder="State" style="width: 20%;">
+            <input type="text" id="zip" placeholder="Zip" style="width: 30%;">
+            <input type="text" id="phone" placeholder="Phone Number" style="width: 50%;">
+            <input class="" type="button" value="Submit"  ng-click="toHide='creation_confirmation'" onclick="createAccount(
+                   document.getElementById('biz_name').value,
+                   document.getElementById('street').value,
+                   document.getElementById('city').value,
+                   document.getElementById('state').value,
+                   document.getElementById('zip').value,
+                   document.getElementById('phone').value )">
+            <br>
+        </form>
+        </div>
+    </div>
+<h1 id="info_confirmed"></h1>
+
+
+</main>
+<footer></footer>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js"></script>-->
+<script src="http://code.angularjs.org/1.3.15/angular-route.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.5.0/firebase.js"></script>
+<script src="biz_home.js"></script>
+</body>
+
+</html>
