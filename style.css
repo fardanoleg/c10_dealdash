@@ -94,10 +94,14 @@ button {
 .frontButton {
     position: relative;
     top: 50%;
-    padding: 0;
     height: 10%;
     width: 10%;
-
+    text-decoration: none;
+    color: black;
+    border: 1px solid black;
+    border-radius: 5%;
+    padding: 1%;
+    font-weight: bold;
 }
 
 #frontMain {
