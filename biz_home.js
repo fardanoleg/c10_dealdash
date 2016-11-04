@@ -120,20 +120,6 @@ var updateData = function (newInfo, field) {
     document.getElementById(field).value = "";
 };
 
-var redeem = function(){
-    var current = [];
-    var query = firebase.database().ref("biz/_test/deals/").orderByKey();
-    query.once("value")
-        .then(function (snapshot) {
-            snapshot.forEach(function (childSnapshot) {
-                var childData = childSnapshot.val();
-                console.log("deal: " + childData.deal + " / code: " + childSnapshot.key);
-
-                current.push(childData.deal + "<button class='redeemBtn'>Redeem</button><br>");
-                document.getElementById("current_info").innerHTML = "Current Deals:<br> " + current;
-            });
-        });
-};
 
 
 
