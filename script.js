@@ -17,25 +17,28 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
 
     //the geoSuccess function determines the user's location.
     //this object stores the user's location (lat/lng) for use in other functions
-    var uluru = {
+    server.confirmWindow = false;  //flag for ngHide/ngShow
+    server.winnerWindow = false;
+    server.newWindow = false;
+    server.selectedDealName = {};   //objects for passing the information from the database
+    server.selectedDealAdress = {};
+    server.selectedDealPhone = {};
+    server.selectedDealId = {};
+    server.selectedDealStatus = {};
+    server.selectedDealCode = {};
+    server.codeString = {};
+    server.selectedDealLocation = {};
+    server.selectedDealTime = {};
+    server.selectedDealDistance = {};
+    server.selectedDealDirections = {};
+
+    var uluru = {         //user location
         lat: null,
         lng: null
     };
-    var startPos;
-    server.createMap = function (pos) {
-        var map = new google.maps.Map(document.getElementById('map'), {
-            center: pos,
-            zoom: 11
-        });
-        var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
-        var marker = new google.maps.Marker({
-            position: pos,
-            map: map,
-            animation: google.maps.Animation.DROP,
-            icon: iconBase + 'library_maps.png'
-        });
-    };
-    server.initMap = function () {
+    var startPos = null;
+
+    server.initMap = function () {   //init map at the beginning while loading(need to be changed later)
         var map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 0, lng: 0},
             zoom: 1
@@ -49,26 +52,57 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
             server.createMap(uluru)
         };
     };
-    server.confirmWindow = false;
-    server.winnerWindow = false;
-    server.newWindow = false;
-    server.selectedDealName = {};
-    server.selectedDealAdress = {};
-    server.selectedDealPhone = {};
-    server.selectedDealId = {};
-    server.selectedDealStatus = {};
-    server.selectedDealCode = {};
-    server.codeString = {};
-    server.currentDeal = function (index) {
+    server.createMap = function (pos) {   //init map with the user's location at the beginning
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: pos,
+            zoom: 11
+        });
+        var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+        var marker = new google.maps.Marker({
+            position: pos,
+            map: map,
+            animation: google.maps.Animation.DROP,
+            icon: iconBase + 'library_maps.png'
+        });
+    };
+    var directionsDisplay;
+
+    server.calcRoute = function (dealIndex) {
+        console.log("Calculating route from user's location to the deal owner", dealIndex);
+        var directionsService = new google.maps.DirectionsService();
+        var start = uluru;
+        var end = server.selectedDealLocation;
+        console.log("Location start: ", start);
+        console.log("Location end: ", end);
+
+        var request = {
+            origin: start,
+            destination: end,
+            travelMode: google.maps.TravelMode.DRIVING
+        };
+        directionsService.route(request, function (response, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+                console.log("RUNNNING");
+                directionsDisplay.setDirections(response);
+                var route = response.routes[0];
+                console.log("route: ", route);
+                server.selectedDealDistance = route.legs[0].distance.text;
+                server.selectedDealTime = route.legs[0].duration.text;
+            }
+        });
+
+
+    };
+    server.currentDeal = function (index) {            // current deal and generate the string for this deal
         console.log('currentDeal running: ', index);
         indexString = this.dealArray[index].phone + this.dealArray[index].zip;
         console.log(indexString);
         server.codeString = this.dealArray[index].phone + this.dealArray[index].zip;
     };
-    server.removeData = function (index) {
+    server.removeData = function (index) {             //remove data from the firebase
         console.log("DELETING Deal from the firebase: ", index);
         fbRef.ref('biz/' + index).remove();
-    }
+    };
 
 
     server.updateData = function (index) {            // update information on the firebase
@@ -86,7 +120,7 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
     var setZoom = 11;
     var buzDeal = {};
     var test;
-    //this sets the search range, default is null, so no businesses will show up until the search button is clicked.
+
     var distanceSearch;
 
     server.initMap2 = function () {                   //initiate a map with the deals
@@ -109,10 +143,22 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
             setZoom = 11;
             console.log("miles: " + distanceSearch + " setZoom: " + setZoom)
         }
-        map = new google.maps.Map(document.getElementById('map'), {
+        var rendererOptions = {   //create object for Renders to make it non-changeble
+            // map: map,
+            // draggable: true
+            preserveViewport: true
+        };
+
+        directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
+        var mapOptions = {
             zoom: setZoom,                                                ///distance
             center: uluru
-        });
+        };
+
+        map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        directionsDisplay.setMap(map);
+        directionsDisplay.setPanel(document.getElementById('panel'));
+
         var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
         var marker = new google.maps.Marker({
             position: uluru,
@@ -156,7 +202,7 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
                 title: key
             });
 
-            google.maps.event.addListener(marker, 'click', function () {
+            google.maps.event.addListener(marker, 'click', function () {      //event will trigger when the marker will be clicked
                 console.log("Listening: ", dealKey);
                 server.newWindow = true;
                 $timeout(function () {
@@ -165,13 +211,15 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
                     server.selectedDealPhone = tempArray[dealKey].phone;
                     server.selectedDealId = dealKey;
                     server.selectedDealStatus = tempArray[dealKey].status;
-                    // console.log("ID: ", server.selectedDealId);
+                    server.selectedDealLocation = tempArray[dealKey].location;
+                    server.calcRoute(dealKey);
                 }, 0);
+
             })
         }
     };
 
-    server.getData = function () {
+    server.getData = function () {        //retriev data from firebase
         var defer = $q.defer();
         fbRef.ref('biz').on('value', function (snapshot) {
                 defer.resolve(snapshot.val());
@@ -187,7 +235,7 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
     return server;
 });
 
-function initMap() {
+function initMap() {            //load myApp after the index page loaded
     console.log("initMap");
     angular.bootstrap($('html')[0], ['myApp']);
 }

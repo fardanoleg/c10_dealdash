@@ -12,7 +12,7 @@
 </head>
 <body ng-controller="tableController as tc">
 <header>
-    <div id="headerDeal">Shake the deal</div>
+    <div id="headerDeal">Pick the deal</div>
 
 </header>
 <main>
@@ -33,16 +33,19 @@
         <button class="confirmButton" ng-click="tc.confirmWinner()">Accept</button>
         <button class="confirmButton" ng-click="tc.declineWinner()">Decline</button>
     </div>
-    <div id="newWindow" ng-init="tc.newWindow=false" ng-show="tc.newWindow">
-        <p id="d_info">Deal INFORMATION:</p>
-        <button id="buttonClickYes" ng-click="tc.acceptClicked()">YES</button>
+    <div ng-init="tc.newWindow=false" ng-show="tc.newWindow" ng-class="tc.new_window()">
+        <button id="extraButton" type="button" ng-click="tc.extraButton()">Click</button>
         <div id="dealInfo">
-            <div class="businessInfo">Bussiness Name: {{tc.selectedDealName}}</div>
-            <div class="businessInfo">Adress: {{tc.selectedDealAddress}}</div>
+            <div class="businessInfo">Deal details: {{tc.selectedDealDetails}}</div>
+            <div class="businessInfo">Business Name: {{tc.selectedDealName}}</div>
+            <div class="businessInfo">Address: {{tc.selectedDealAddress}}</div>
             <div class="businessInfo">Phone: {{tc.selectedDealPhone}}</div>
-            <div class="businessInfo">Deal Details: {{tc.selectedDealInfo}}</div>
             <div class="businessInfo">Review: {{tc.selectedYelpReview}}</div>
+            <div class="businessInfo">Time: {{tc.selectedDealTime}} Distance: {{tc.selectedDealDistance}}les</div>
+            <div class="businessInfo">Distance: {{tc.selectedDealDistance}}</div>
+            <div id="panel">Directions:</div>
         </div>
+        <button id="buttonClickYes" ng-click="tc.acceptClicked()">YES</button>
         <button id="buttonClickNo" ng-click="tc.declineClicked()">NO</button>
     </div>
 </main>

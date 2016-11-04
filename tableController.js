@@ -26,7 +26,7 @@ app.controller("tableController", function (myFactory, $log, $scope) {
     this.declineWinner = function () {
         console.log("declineWinner running");
         myFactory.confirmWindow = false;
-    }
+    };
 
     this.acceptClicked = function () {
         if (this.selectedDealStatus === "accepted") {
@@ -36,23 +36,6 @@ app.controller("tableController", function (myFactory, $log, $scope) {
             currentDeal = this.selectedDealId;                    //grab the deal by the index
             console.log("CurrentDEal: ", currentDeal);
             myFactory.confirmWindow = true;
-
-            // var a;
-
-            // function confirM() {
-            //     a = confirm("Are you sure you want to accept the deal?");
-            //     return a
-            // }
-
-            // confirM();
-            // if (a) {                                           //if confirm is accepted
-            //     myFactory.currentDeal(currentDeal);
-            //     myFactory.updateData(currentDeal);
-            //
-            //     myFactory.winnerWindow = true;
-            // } else {
-            //     console.log("deal was not confirmed");
-            // }
         }
     };
 
@@ -75,6 +58,25 @@ app.controller("tableController", function (myFactory, $log, $scope) {
         console.log("you clicked miles search of amount mile : ", distanceSearch);
         myFactory.newWindow = false;
         self.getData();
+    };
+    var classArray = ["new_window", "new_window1", "new_window2"];
+    var indexClass = 0;
+    this.new_window_class = "new_window";
+    this.new_window = function () {
+        console.log("RUNNNING");
+
+        return classArray[indexClass];
+    };
+    this.extraButton = function () {
+        console.log(" Extra Button Clicked");
+        indexClass++;
+        if (indexClass == classArray.length) {
+            indexClass = 0;
+        }
+    }
+    this.changeButtonClass = function () {
+        console.log("Change class running");
+
     };
 
     Object.defineProperty(this, "selectedDealName", {      //same as this.selectedDealName = myFactory.selectedDealName;
@@ -131,4 +133,17 @@ app.controller("tableController", function (myFactory, $log, $scope) {
             return myFactory.confirmWindow;
         }
     });
+    Object.defineProperty(this, "selectedDealTime", {
+        get: function () {
+            console.log("get selected Deal time");
+            return myFactory.selectedDealTime;
+        }
+    });
+    Object.defineProperty(this, "selectedDealDistance", {
+        get: function () {
+            console.log("get selected Deal distance");
+            return myFactory.selectedDealDistance;
+        }
+    });
+
 });

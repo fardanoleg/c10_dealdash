@@ -116,16 +116,17 @@ button {
     text-align: center;
 }
 
-#newWindow {
+.new_window {
     position: fixed;
     text-align: center;
-    height: 25%;
+    height: 10%;
     width: 100%;
     bottom: 0;
     background-color: lavender;
     z-index: 1;
     margin: 0;
     padding: 0;
+    /*transition: 0.5s*/
 }
 
 #winnerWindow {
@@ -165,23 +166,23 @@ button {
 #buttonClickYes {
     position: fixed;
     display: inline-block;
-    height: 25%;
-    width: 18%;
+    height: 10%;
+    width: 50%;
     margin: 0;
     padding: 0;
     left: 0;
-    top: 75%;
+    top: 0;
 }
 
 #buttonClickNo {
     position: fixed;
     display: inline-block;
-    height: 25%;
-    width: 18%;
+    height: 10%;
+    width: 50%;
     margin: 0;
     padding: 0;
     right: 0;
-    top: 75%;
+    top: 0;
 
 }
 
@@ -217,4 +218,38 @@ button {
     width: 100%;
     background-color: lightgrey;
     z-index: -1
+}
+
+#extraButton {
+    text-align: center;
+    height: 1vh;
+    width: 10vw;
+    padding: 0;
+    margin: 0;
+}
+
+.new_window1 {
+    position: fixed;
+    text-align: center;
+    height: 25%;
+    width: 100%;
+    bottom: 0;
+    background-color: lightgreen;
+    z-index: 1;
+    margin: 0;
+    padding: 0;
+    transition: 1s
+}
+
+.new_window2 {
+    position: fixed;
+    text-align: center;
+    height: 90%;
+    width: 100%;
+    bottom: 0;
+    background-color: lightcoral;
+    z-index: 1;
+    margin: 0;
+    padding: 0;
+    transition: 1s
 }
