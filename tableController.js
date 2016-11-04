@@ -26,6 +26,7 @@ app.controller("tableController", function (myFactory, $log, $scope) {
     this.declineWinner = function () {
         console.log("declineWinner running");
         myFactory.confirmWindow = false;
+
     };
 
     this.acceptClicked = function () {
@@ -50,7 +51,9 @@ app.controller("tableController", function (myFactory, $log, $scope) {
 
     this.declineClicked = function () {          //when decline the deal was clicked will store the deal to the local storage
         console.log("decline was clicked with:");
+        indexClass = 0;
         myFactory.newWindow = false;
+        myFactory.removeDirection();
     };
 
     this.clickMileSearch = function (distanceSearch) {

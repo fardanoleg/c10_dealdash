@@ -13,7 +13,6 @@
 <body ng-controller="tableController as tc">
 <header>
     <div id="headerDeal">Pick the deal</div>
-
 </header>
 <main>
     <div id="map">
@@ -42,7 +41,7 @@
             <div class="businessInfo">Phone: {{tc.selectedDealPhone}}</div>
             <div class="businessInfo">Review: {{tc.selectedYelpReview}}</div>
             <div class="businessInfo">Time: {{tc.selectedDealTime}} Distance: {{tc.selectedDealDistance}}les</div>
-            <div class="businessInfo">Distance: {{tc.selectedDealDistance}}</div>
+            <br>
             <div id="panel">Directions:</div>
         </div>
         <button id="buttonClickYes" ng-click="tc.acceptClicked()">YES</button>
