@@ -9,19 +9,25 @@
     Business Control Panel
 </header>
 <main>
-    <!-- post new deal div -->
+    <!-- post new deal div ------------------------------------------------------------------------------------------>
     <button class="biz_home_btns" ng-click="toShow='post_new'">Post New</button>
     <br>
     <div ng-show="toShow=='post_new'">
-        <input type="text" id="newDeal" name="newDeal"><br>
+        <input type="text" id="newDeal" name="newDeal" placeholder="Enter Details">
+        <input type="text" id="newDealQty" name="newDealQty" placeholder="Qty"><br>
         <input id="newDealSubmit" type="button" value="Submit"
-               onclick="newDeal(document.getElementById('newDeal').value)">
+               onclick="newDeal(
+                       document.getElementById('newDeal').value,
+                       document.getElementById('newDealQty').value
+               )">
+
+
         <button class="biz_home_btns" ng-click="toShow='exit_screen'">Close</button>
         <br>
         <span id="new_info"></span>
     </div>
     <br>
-    <!-- display current deals div -->
+    <!-- display current deals div --------------------------------------------------------------------------------->
     <button class="biz_home_btns" ng-click="toShow='current'" onclick="currentDeal()">Current Deals</button>
     <br>
     <div ng-show="toShow=='current'">
@@ -29,7 +35,7 @@
         <button class="biz_home_btns" ng-click="toShow='exit_screen'">Close</button>
     </div>
     <br>
-    <!-- display/update business info -->
+    <!-- display/update business info ------------------------------------------------------------------------------>
     <button class="biz_home_btns" ng-click="toShow='biz_info'" onclick="displayData()">View/Update Data</button>
     <div ng-show="toShow=='biz_info'" id="biz_info">
         <span id="bizName"></span><input type="checkbox" ng-model="edit" id="edit_checkbox">
@@ -73,6 +79,7 @@
         <button class="exit_button" ng-click="toShow='exit_screen'">Close</button>
     </div>
     <div ng-show="toShow=='exit_screen'" id="biz_info"></div>
+
 </main>
 <footer></footer>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
