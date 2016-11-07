@@ -56,7 +56,6 @@ button {
     margin-left: 5%;
 }
 
-
 #distance1, #distance3, #distance5 {
     height: 100%;
     width: 20%;
@@ -305,7 +304,6 @@ button {
     margin-top: 1%;
 }
 
-
 #biz_info,
 #current_info,
 #new_info {
@@ -319,7 +317,7 @@ button {
 }
 
 .info_display {
-line-height: 70%;
+    line-height: 70%;
     font-size: .8em;
 }
 
@@ -464,9 +462,7 @@ input[type='checkbox']:checked {
     height: 60vh;
     width: 100vw;
     background-color: white;
-
 }
-
 
 .buttonSign {
     background-color: white;
@@ -492,6 +488,11 @@ input[type='checkbox']:checked {
     transform: rotateZ(90deg); /* Standard syntax */
 }
 
-#control_panel_header{
+#control_panel_header {
     padding: 0;
+}
+
+#biz_sign_up {
+    background-color: darkred;
+    color: white;
 }
