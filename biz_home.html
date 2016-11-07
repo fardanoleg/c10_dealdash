@@ -20,64 +20,69 @@
                        document.getElementById('newDeal').value,
                        document.getElementById('newDealQty').value
                )">
-        <button class="biz_home_btns" ng-click="toShow='exit_screen'">Close</button>
+        <button class="biz_home_btns" ng-click="toShow='exit_screen'" onclick="location.reload();">Close</button>
         <br>
         <span id="new_info"></span>
     </div>
     <br>
     <!-- display current deals div --------------------------------------------------------------------------------->
     <button class="biz_home_btns" ng-click="toShow='current'" onclick="currentDeal()">Current Deals</button>
-    <br>
+
     <div ng-show="toShow=='current'">
         <span id="current_info"></span>
-        <button class="biz_home_btns" ng-click="toShow='exit_screen'">Close</button>
+        <span id="redeem_screen"></span>
+        <button class="biz_home_btns" ng-click="toShow='exit_screen'" onclick="location.reload();">Close</button>
     </div>
     <br>
     <!-- display/update business info ------------------------------------------------------------------------------>
     <button class="biz_home_btns" ng-click="toShow='biz_info'" onclick="displayData()">View/Update Data</button>
-    <div ng-show="toShow=='biz_info'" id="biz_info">
-        <span id="bizName"></span>
+    <div ng-show="toShow=='biz_info'" id="biz_info" class="info_display">
+        <span class="info_display" id="bizName"></span>
         <br>
-        <span id="street_address"></span>
+        <span class="info_display" id="street_address"></span>
         <br>
-        <span id="city_name"></span>
-        <span id="state_of"></span>
-        <span id="zip_code"></span>
+        <span class="info_display" id="city_name"></span>
+        <span class="info_display" id="state_of"></span>
+        <span class="info_display" id="zip_code"></span>
         <br>
-        <span id="phone_num"></span><br>
-        <input type="checkbox" ng-model="edit" id="edit_checkbox"><em>edit</em>
+        <span class="info_display" id="phone_num"></span>
+        <br>
+        <span class="info_display" id="email_addy"></span><br>
+        <input type="checkbox" ng-model="edit" id="edit_checkbox" class="info_display"><em>edit</em>
         <br>
         <span id="change_confirmed"></span>
         <div id="edit_biz_info" ng-show="edit">
-            <br>
-            Name:<input type="text" id="biz_name">
+
+            <input type="text" id="biz_name"  placeholder="Business Name">
             <input class="edit" type="button" value="Submit"
                    onclick="updateData(document.getElementById('biz_name').value, 'biz_name')">
             <br>
-            Street:<input type="text" id="street">
+            <input type="text" id="street"  placeholder="Street Address">
             <input class="edit" type="button" value="Submit"
                    onclick="updateData(document.getElementById('street').value, 'street')">
             <br>
-            City: <input type="text" id="city">
+            <input type="text" id="city"  placeholder="City">
             <input class="edit" type="button" value="Submit"
                    onclick="updateData(document.getElementById('city').value, 'city')">
             <br>
-            State: <input type="text" id="state">
+            <input type="text" id="state"  placeholder="State">
             <input class="edit" type="button" value="Submit"
                    onclick="updateData(document.getElementById('state').value, 'state')">
             <br>
-            Zip: <input type="text" id="zip">
+            <input type="text" id="zip"  placeholder="Zip">
             <input class="edit" type="button" value="Submit"
                    onclick="updateData(document.getElementById('zip').value, 'zip')">
             <br>
-            Phone: <input type="text" id="phone">
+            <input type="text" id="phone" placeholder="Phone Number">
             <input class="edit" type="button" value="Submit"
                    onclick="updateData(document.getElementById('phone').value, 'phone')">
+            <br>
+            <input type="text" id="email" placeholder="Email">
+            <input class="edit" type="button" value="Submit"
+                   onclick="updateData(document.getElementById('phone').value, 'email')">
         </div>
-        <button class="exit_button" ng-click="toShow='exit_screen'">Close</button>
+        <button class="biz_home_btns" ng-click="toShow='exit_screen'" onclick="location.reload();">Close</button>
     </div>
-    <div ng-show="toShow=='exit_screen'" id="biz_info"></div>
-    <br>
 </main>
 <footer></footer>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
@@ -88,3 +93,4 @@
 <script src="biz_home.js"></script>
 </body>
 </html>
+
