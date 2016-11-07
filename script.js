@@ -19,6 +19,10 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
     //this object stores the user's location (lat/lng) for use in other functions
     server.confirmWindow = false;  //flag for ngHide/ngShow
     server.approveWindow = true;
+    server.newDealDiv = false;
+    server.newDealClose = false;
+    server.currentDealDiv = false;
+    server.updateDealDiv = false;
     server.winnerWindow = false;
     server.newWindow = false;
     server.selectedDealName = {};   //objects for passing the information from the database
@@ -38,7 +42,7 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
         lng: null
     };
     var startPos = null;
-    server.createAccount = function (name, street, city, state, zip, phone, email) {
+    server.createAccount = function (name, street, city, state, zip, phone, email, password) {
         var bizObj = {};
         //takes the parameters passed in to this function, and makes them part of the empty object defined above
         bizObj.biz_name = name;
@@ -50,8 +54,7 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
         bizObj.email = email;
         bizObj.code = "";
         bizObj.status = "";
-        bizObj.username = "";
-        bizObj.password = "";
+        bizObj.password = password;
         //location takes the user's current location and sets it as the business location
         bizObj.location = {lat: uluru.lat, lng: uluru.lng};
         //pushing info to firebase
@@ -60,7 +63,6 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
         //displays the entered information back to confirm
         document.getElementById('sign_up').innerHTML = "Thank You!";
         document.getElementById('info_confirmed').innerHTML = "Your account has been created: <br> " +
-
             bizObj.biz_name
             + "<br>" +
             bizObj.street
@@ -76,6 +78,88 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
             bizObj.email;
         server.approveWindow = false;
     };
+
+    server.newDeal = function (deal, qty) {
+        console.log(deal);
+        console.log(qty);
+
+        //conditional checks to make sure the qty is a number between 1-10
+        if (qty = 1) {
+            console.log("1111");
+            var dealMsg = {
+                deal: deal
+            };
+            //loop that send the deal to firebase depending on the qty entered, i.e. qty of 2 = deal generated twice;
+            for (var i = 0; i <= qty - 1; i++) {
+                console.log(qty + " " + deal + " deals has been entered");
+                fbRef.ref('biz/_test/deals').push(dealMsg);
+            }
+            //text that displays after the deal has been entered
+            document.getElementById("new_info").innerHTML = "The following deal has been posted:<br> " + deal + " (qty: " + qty + " )";
+            document.getElementById('newDeal').value = "";
+            document.getElementById('newDealQty').value = "";
+        }
+        else {
+            //text that displays if an invalid qty has been entered
+            document.getElementById("new_info").innerHTML = "Please enter a valid number from 1 to 10";
+        }
+    };
+
+//function shows the business its deals currently in effect
+    server.currentDealUp = function () {
+        var current = [];
+        var query = firebase.database().ref("biz/_test/deals/").orderByKey();
+        query.once("value")
+            .then(function (snapshot) {
+                snapshot.forEach(function (childSnapshot) {
+                    var childData = childSnapshot.val();
+                    console.log("deal: " + childData.deal + " / code: " + childSnapshot.key);
+                    // var modCode = childSnapshot.key.substring(1);
+                    current.push(childData.deal + "<button class='redeemBtn'>Redeem</button><br>");
+                    document.getElementById("current_info").innerHTML = "Current Deals:<br> " + current;
+                });
+            });
+    };
+
+//updates function reads the data stored in firebase and displays it on screen.
+//Changes to the business' info are displayed in real-time.
+//     var updates = {};
+    server.displayData = function () {
+        fbRef.ref('biz/_test').on('value', function (snapshot) {
+            updates = snapshot.val();
+            document.getElementById("bizName").innerHTML = updates.biz_name;
+            document.getElementById("street_address").innerHTML = updates.street;
+            document.getElementById("city_name").innerHTML = updates.city;
+            document.getElementById("state_of").innerHTML = updates.state;
+            document.getElementById("zip_code").innerHTML = updates.zip;
+            document.getElementById("phone_num").innerHTML = updates.phone;
+            updates = {};
+        });
+    };
+
+//updateData takes in two parameters in order to update the appropriate field in firebase with the new info.
+    var updateData = function (newInfo, field) {
+        updates['biz/_test/' + field] = newInfo;
+        fbRef.ref().update(updates);
+        document.getElementById('change_confirmed').innerHTML = "Update Confirmed: " + newInfo + "<br>";
+        document.getElementById(field).value = "";
+    };
+
+    var redeem = function () {
+        var current = [];
+        var query = firebase.database().ref("biz/_test/deals/").orderByKey();
+        query.once("value")
+            .then(function (snapshot) {
+                snapshot.forEach(function (childSnapshot) {
+                    var childData = childSnapshot.val();
+                    console.log("deal: " + childData.deal + " / code: " + childSnapshot.key);
+
+                    current.push(childData.deal + "<button class='redeemBtn'>Redeem</button><br>");
+                    document.getElementById("current_info").innerHTML = "Current Deals:<br> " + current;
+                });
+            });
+    };
+
 
     server.initMap = function () {   //init map at the beginning while loading(need to be changed later)
         var map = new google.maps.Map(document.getElementById('map'), {
