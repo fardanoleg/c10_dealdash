@@ -49,9 +49,11 @@ app.controller("mainController", function (myFactory, $log, $scope) {
         console.log("running show display: ");
         myFactory.updateDealDiv = true;
     };
+    this.redeemCont = function () {
 
+    }
     this.newDeal = function () {
-        var qty = $scope.quantityInput;
+        var qty = parseInt($scope.quantityInput);
         console.log("quantity: ", qty);
         var dealS = $scope.detailsInput;
         console.log("details deal: ", dealS);
@@ -102,6 +104,12 @@ app.controller("mainController", function (myFactory, $log, $scope) {
         get: function () {
             console.log("updateDealDiv clicked");
             return myFactory.updateDealDiv;
+        }
+    });
+    Object.defineProperty(this, "redeemCont", {
+        get: function () {
+            console.log("redeem clicked");
+            return myFactory.redeem;
         }
     });
 });

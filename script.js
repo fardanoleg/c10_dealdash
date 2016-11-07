@@ -79,12 +79,12 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
         server.approveWindow = false;
     };
 
-    server.newDeal = function (deal, qty) {
+    server.newDeal = function (qty, deal) {
         console.log(deal);
         console.log(qty);
-
+        console.log(typeof(qty));
         //conditional checks to make sure the qty is a number between 1-10
-        if (qty = 1) {
+        if (qty > 0 && qty < 6) {
             console.log("1111");
             var dealMsg = {
                 deal: deal
@@ -115,7 +115,7 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
                     var childData = childSnapshot.val();
                     console.log("deal: " + childData.deal + " / code: " + childSnapshot.key);
                     // var modCode = childSnapshot.key.substring(1);
-                    current.push(childData.deal + "<button class='redeemBtn'>Redeem</button><br>");
+                    current.push(childData.deal + "<button class='redeemBtn' ng-click='server.redeem($index)'>Redeem</button><br>");
                     document.getElementById("current_info").innerHTML = "Current Deals:<br> " + current;
                 });
             });
@@ -125,6 +125,7 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
 //Changes to the business' info are displayed in real-time.
 //     var updates = {};
     server.displayData = function () {
+        console.log("redeeeem");
         fbRef.ref('biz/_test').on('value', function (snapshot) {
             updates = snapshot.val();
             document.getElementById("bizName").innerHTML = updates.biz_name;
@@ -145,20 +146,20 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
         document.getElementById(field).value = "";
     };
 
-    var redeem = function () {
-        var current = [];
-        var query = firebase.database().ref("biz/_test/deals/").orderByKey();
-        query.once("value")
-            .then(function (snapshot) {
-                snapshot.forEach(function (childSnapshot) {
-                    var childData = childSnapshot.val();
-                    console.log("deal: " + childData.deal + " / code: " + childSnapshot.key);
-
-                    current.push(childData.deal + "<button class='redeemBtn'>Redeem</button><br>");
-                    document.getElementById("current_info").innerHTML = "Current Deals:<br> " + current;
-                });
-            });
-    };
+    // server.redeem = function () {
+    //     var current = [];
+    //     var query = firebase.database().ref("biz/_test/deals/").orderByKey();
+    //     query.once("value")
+    //         .then(function (snapshot) {
+    //             snapshot.forEach(function (childSnapshot) {
+    //                 var childData = childSnapshot.val();
+    //                 console.log("deal: " + childData.deal + " / code: " + childSnapshot.key);
+    //
+    //                 current.push(childData.deal + "<button class='redeemBtn' >Redeem</button><br>");
+    //                 document.getElementById("current_info").innerHTML = "Current Deals:<br> " + current;
+    //             });
+    //         });
+    // };
 
 
     server.initMap = function () {   //init map at the beginning while loading(need to be changed later)
