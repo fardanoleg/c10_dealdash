@@ -321,6 +321,7 @@ line-height: 70%;
     text-decoration: none;
     font-weight: bold;
     border-radius: 5%;
+    color: black
 }
 
 .edit {
@@ -470,6 +471,7 @@ input[type='checkbox']:checked {
     text-decoration: underline;
     font-weight: bold;
     border-radius: 5%;
+}
 
 .exitButton {
     height: 20%;
@@ -481,3 +483,11 @@ input[type='checkbox']:checked {
     color: white;
 }
 
+#gears {
+    -webkit-transform: rotateZ(90deg); /* Safari */
+    transform: rotateZ(90deg); /* Standard syntax */
+}
+
+#control_panel_header{
+    padding: 0;
+}
