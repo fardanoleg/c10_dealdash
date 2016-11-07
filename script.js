@@ -18,6 +18,7 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
     //the geoSuccess function determines the user's location.
     //this object stores the user's location (lat/lng) for use in other functions
     server.confirmWindow = false;  //flag for ngHide/ngShow
+    server.approveWindow = true;
     server.winnerWindow = false;
     server.newWindow = false;
     server.selectedDealName = {};   //objects for passing the information from the database
@@ -37,6 +38,44 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
         lng: null
     };
     var startPos = null;
+    server.createAccount = function (name, street, city, state, zip, phone, email) {
+        var bizObj = {};
+        //takes the parameters passed in to this function, and makes them part of the empty object defined above
+        bizObj.biz_name = name;
+        bizObj.street = street;
+        bizObj.city = city;
+        bizObj.state = state;
+        bizObj.zip = zip;
+        bizObj.phone = phone;
+        bizObj.email = email;
+        bizObj.code = "";
+        bizObj.status = "";
+        bizObj.username = "";
+        bizObj.password = "";
+        //location takes the user's current location and sets it as the business location
+        bizObj.location = {lat: uluru.lat, lng: uluru.lng};
+        //pushing info to firebase
+        fbRef.ref('biz/').push(bizObj);
+        //confirmation screen is displayed after the submit button is clicked, and
+        //displays the entered information back to confirm
+        document.getElementById('sign_up').innerHTML = "Thank You!";
+        document.getElementById('info_confirmed').innerHTML = "Your account has been created: <br> " +
+
+            bizObj.biz_name
+            + "<br>" +
+            bizObj.street
+            + "<br>" +
+            bizObj.city
+            + " " +
+            bizObj.state
+            + " " +
+            bizObj.zip
+            + "<br>" +
+            bizObj.phone
+            + "<br>" +
+            bizObj.email;
+        server.approveWindow = false;
+    };
 
     server.initMap = function () {   //init map at the beginning while loading(need to be changed later)
         var map = new google.maps.Map(document.getElementById('map'), {
