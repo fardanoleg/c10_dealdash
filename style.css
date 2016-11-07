@@ -12,8 +12,8 @@ header {
     padding: 0;
     text-align: center;
     height: 10%;
-    background-color: lavender;
     font-size: 3em;
+    color: darkred;
 }
 
 main {
@@ -28,14 +28,15 @@ footer {
     height: 10%;
     padding: 0;
     text-align: center;
-    background-color: lavender;
+    background-color: white;
 }
 
 #distanceCustom,
 button {
     font-size: 1em;
     padding: 0;
-    background-color: lavender;
+    background-color: white;
+    color: darkred;
     border-radius: 5%;
     font-weight: bold;
     margin: 0 0 0 0;
@@ -44,7 +45,7 @@ button {
 #distanceCustom {
     width: 7vh;
     background-color: white;
-    color: black;
+    color: darkred;
 }
 
 #distance1, #distance3, #distance5 {
@@ -149,7 +150,8 @@ button {
     height: 10%;
     width: 100%;
     bottom: 0;
-    background-color: lavender;
+    background-color: darkred;
+    color: white;
     z-index: 1;
     margin: 0;
     padding: 0;
@@ -163,7 +165,7 @@ button {
     width: 80%;
     bottom: 40%;
     left: 10%;
-    background-color: lightyellow;
+    background-color: white;
     z-index: 3;
 }
 
@@ -175,7 +177,7 @@ button {
     left: 0;
     height: 100%;
     width: 100%;
-    background-color: lightgrey;
+    background-color: white;
     z-index: -1
 }
 
@@ -231,7 +233,9 @@ button {
     width: 60%;
     bottom: 40%;
     left: 20%;
-    background-color: lightyellow;
+    background-color: white;
+    border: 1px solid darkred;
+    border-radius: 5%;
     z-index: 2;
 }
 
@@ -243,7 +247,7 @@ button {
     left: 0;
     height: 100%;
     width: 100%;
-    background-color: lightgrey;
+    background-color: white;
     z-index: -1
 }
 
@@ -261,7 +265,7 @@ button {
     height: 25%;
     width: 100%;
     bottom: 0;
-    background-color: lightgreen;
+    background-color: white;
     z-index: 1;
     margin: 0;
     padding: 0;
@@ -275,7 +279,8 @@ button {
     height: 90%;
     width: 100%;
     bottom: 0;
-    background-color: lightcoral;
+    background-color: white;
+    color: darkred;
     z-index: 1;
     margin: 0;
     padding: 0;
@@ -307,8 +312,8 @@ line-height: 70%;
 
 #newDealSubmit,
 .biz_home_btns {
-    border: 1px solid black;
-    background-color: lavender;
+    border: 1px solid darkred;
+    background-color: white;
     padding: 2%;
     display: inline-block;
     margin: 5% 0 5% 0;
@@ -320,11 +325,11 @@ line-height: 70%;
 
 .edit {
     background-color: white;
-    color: black;
+    color: darkred;
     font-weight: normal;
     padding: 0;
     margin-left: 3%;
-    border: 1px solid black;
+    border: 1px solid darkred;
     border-radius: 5%;
 }
 
@@ -364,7 +369,7 @@ input[type='checkbox'] {
 }
 
 input[type='checkbox']:checked {
-    background: darkblue;
+    background: darkred;
 
 }
 
@@ -418,7 +423,8 @@ input[type='checkbox']:checked {
 }
 
 #redeemBtn {
-    color: black;
+    color: white;
+    background-color: darkred;
     padding: 0;
     font-size: .8em;
     margin-left: 5%;
@@ -456,6 +462,7 @@ input[type='checkbox']:checked {
 
 }
 
+
 .buttonSign {
     background-color: white;
     color: darkred;
@@ -463,23 +470,14 @@ input[type='checkbox']:checked {
     text-decoration: underline;
     font-weight: bold;
     border-radius: 5%;
+
+.exitButton {
+    height: 20%;
+    width: 40%;
 }
 
 .buttonSign span {
     border: 1px solid darkred;
     color: white;
 }
-
-#buz_body img {
-    height: 100%;
-    -webkit-transform: rotateZ(90deg); /* Safari */
-    transform: rotateZ(90deg);
-}
-
-#sign_up {
-    background-color: white;
-    color: darkred;
-}
-
-
 

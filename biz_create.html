@@ -1,51 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="myApp">
 <head>
     <title></title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Eczar:700" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="http://code.angularjs.org/1.3.15/angular-route.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.5.0/firebase.js"></script>
 </head>
-<body ng-app="ngAnimate">
-<header id="sign_up">
+<body>
+<header id="biz_sign_up">
     Sign Up!
 </header>
-<main>
-    <!-- create business account -->
+<main ng-controller="mainController as mc">
     <div id="create_account">
-        <div ng-hide="toHide=='creation_confirmation'">
+        <!--<div ng-hide="toHide=='creation_confirmation'">-->
+        <div id="approveWindow" ng-show="mc.approveWindow">
             <form id="frm1">
                 <br>
-                <input type="text" id="biz_name" placeholder="Business Name">
+                <input type="text" id="biz_name" placeholder="Business Name" ng-model="biz_name">
                 <br>
-                <input type="text" id="street" placeholder="Street Address">
+                <input type="text" id="street" placeholder="Street Address" ng-model="street">
                 <br>
-                <input type="text" id="city" placeholder="City" style="width: 58%;">
-                <input type="text" id="state" placeholder="State" style="width: 20%;">
+                <input type="text" id="city" placeholder="City" style="width: 60%;" ng-model="city">
+                <input type="text" id="state" placeholder="State" style="width: 20%;" ng-model="state">
+                <input type="text" id="zip" placeholder="Zip" style="width: 30%;" ng-model="zip">
+                <input type="text" id="phone" placeholder="Phone Number" style="width: 50%;" ng-model="phone">
+                <input type="text" id="email" placeholder="Email" style="width: 50%;" ng-model="email">
+                <input type="text" id="password" placeholder="Password" style="width: 50%;" ng-model="password">
                 <br>
-                <input type="text" id="zip" placeholder="Zip" style="width: 30%;">
-                <input type="text" id="phone" placeholder="Phone Number" style="width: 48%;">
-                <br>
-                <input type="text" id="email" placeholder="Email Address" style="width: 80%"><br>
-                <input class="buttonSign" type="button" value="Submit" ng-click="toHide='creation_confirmation'" onclick="createAccount(
-                   document.getElementById('biz_name').value,
-                   document.getElementById('street').value,
-                   document.getElementById('city').value,
-                   document.getElementById('state').value,
-                   document.getElementById('zip').value,
-                   document.getElementById('phone').value,
-                   document.getElementById('email').value )">
+                <input class="buttonSign" type="button" id="button" value="Submit" ng-click="mc.submitClicked()">
                 <br>
             </form>
         </div>
     </div>
     <h1 id="info_confirmed"></h1>
+    <a class="exitButton" href="biz_home.html" ng-hide="mc.approveWindow">Exit</a>
 </main>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="http://code.angularjs.org/1.3.15/angular-route.js"></script>
-<script src="https://www.gstatic.com/firebasejs/3.5.0/firebase.js"></script>
-<script src="biz_home.js"></script>
+<script src="dealApp.js"></script>
+<script src="script.js"></script>
+<!--<script src="biz_home.js"></script>-->
+<script src="mainController.js"></script>
 </body>
 
 </html>
