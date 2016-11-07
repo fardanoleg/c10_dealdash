@@ -41,12 +41,13 @@ app.controller("tableController", function (myFactory, $log, $scope) {
     };
 
     this.acceptWinner = function (value) {
+        var emailInfo = $scope.emailInfo;
+        console.log("emailInfo: ", emailInfo);
         console.log("winner accepted", value);
         myFactory.newWindow = false;
         myFactory.winnerWindow = false;
         myFactory.confirmWindow = false;
         myFactory.removeData(currentDeal);
-
     };
 
     this.declineClicked = function () {          //when decline the deal was clicked will store the deal to the local storage
@@ -57,8 +58,14 @@ app.controller("tableController", function (myFactory, $log, $scope) {
     };
 
     this.clickMileSearch = function (distanceSearch) {
-        distanceMiles = distanceSearch;
-        console.log("you clicked miles search of amount mile : ", distanceSearch);
+        var distanceInput = $scope.distanceCustom;
+        console.log('distance: ', distanceInput);
+        if (distanceSearch != null) {
+            distanceMiles = distanceSearch;
+            console.log("you clicked miles search of amount mile : ", distanceSearch);
+        } else {
+            distanceMiles = distanceInput;
+        }
         myFactory.newWindow = false;
         self.getData();
     };
@@ -67,9 +74,9 @@ app.controller("tableController", function (myFactory, $log, $scope) {
     this.new_window_class = "new_window";
     this.new_window = function () {
         console.log("RUNNNING");
-
         return classArray[indexClass];
     };
+
     this.extraButton = function () {
         console.log(" Extra Button Clicked");
         indexClass++;

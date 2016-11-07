@@ -81,7 +81,7 @@ var newDeal = function (deal, qty) {
     //amount of current deals is compared with the max amount of deals allowed (5 deals)
     amtOfDealsCheck();
     if (numOfDeals.length >= 5 || (numOfDeals.length + qty) >= 5) {
-        document.getElementById("new_info").innerHTML = "You have exceeded the maximum amount of deals"
+        document.getElementById("new_info").innerHTML = "You've exceeded the maximum amount of deals allowed"
     }
     else {
         //conditional checks to make sure the qty is a number between 1-10

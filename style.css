@@ -33,11 +33,11 @@ footer {
 #distanceCustom,
 button {
     font-size: 1em;
-    padding: 2%;
+    padding: 0;
     background-color: lavender;
     border-radius: 5%;
     font-weight: bold;
-    margin: 1% 0 0 0;
+    margin: 0 0 0 0;
 }
 
 #distanceCustom {
@@ -47,7 +47,18 @@ button {
 }
 
 #distance1, #distance3, #distance5 {
+    height: 100%;
+    width: 23%;
+    margin: 0;
+    padding: 0;
+    border-style: 1em solid black;
+}
+
+#distanceRand, #distanceCustom {
     height: 90%;
+    width: 12.5%;
+    margin: 0;
+    padding: 0;
 }
 
 #businesses {
@@ -60,6 +71,8 @@ button {
 #map {
     height: 100%;
     width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 .bottomWindow {
@@ -70,6 +83,9 @@ button {
 
 #inputMiles {
     width: 4%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 #map {
@@ -113,6 +129,8 @@ button {
 }
 
 .buttons {
+    margin: 0;
+    padding: 0;
     text-align: center;
 }
 
@@ -397,12 +415,33 @@ input[type='checkbox']:checked {
     margin-left: 5%;
 }
 
+
 #redeem_screen {
     color: darkred;
     font-weight: bold;
     font-size: 2em;
 }
 
+.loginInfo {
+    height: 40%;
+    width: 60%;
+    border-style: solid
+}
+
+#loginDiv {
+    position: relative;
+    top: 30%;
+    left: 25%;
+    height: 10%;
+    width: 60%;
+}
+
+#buz_body {
+    height: 100vh;
+    width: 100vw;
+    background-color: lavender;
+
+}
 
 
 
