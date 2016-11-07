@@ -1,45 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <title>Biz_Home page</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Eczar:700" rel="stylesheet">
-</head>
-<body ng-app="ngAnimate">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="http://code.angularjs.org/1.3.15/angular-route.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.5.0/firebase.js"></script>
+<body ng-app="myApp">
 <header id="control_panel_header">
     <img id="gears" src="images/gears.GIF" width="60"/>
-    Business Control Panel<br>
-    </header>
-<main>
+    Business Control Panel
+</header>
+<main ng-controller="mainController as mc">
     <!-- post new deal div ------------------------------------------------------------------------------------------>
-    <button class="biz_home_btns" ng-click="toShow='post_new'">Post New</button>
+    <button class="biz_home_btns" ng-click="mc.newDD()">Post New</button>
     <br>
-    <div ng-show="toShow=='post_new'">
-        <input type="text" id="newDeal" name="newDeal" placeholder="Enter Details">
-        <input type="text" id="newDealQty" name="newDealQty" placeholder="Qty (5 max)"><br>
-        <input id="newDealSubmit" type="button" value="Submit"
-               onclick="newDeal(
-                       document.getElementById('newDeal').value,
-                       document.getElementById('newDealQty').value
-               )">
-        <button class="biz_home_btns" ng-click="toShow='exit_screen'" onclick="">Close</button>
+    <div ng-show="mc.newDealDiv">
+        <input type="text" id="newDeal" name="newDeal" placeholder="Enter Details" ng-model="detailsInput">
+        <input type="text" id="newDealQty" name="newDealQty" placeholder="Qty" ng-model="quantityInput"><br>
+        <input id="newDealSubmit" type="button" value="Submit" ng-click="mc.newDeal()">
+        <button class="biz_home_btns" ng-click="mc.newDealClose()">Close</button>
         <br>
         <span id="new_info"></span>
     </div>
     <br>
     <!-- display current deals div --------------------------------------------------------------------------------->
-    <button class="biz_home_btns" ng-click="toShow='current'" onclick="currentDeal()">Current Deals</button>
-
-    <div ng-show="toShow=='current'">
+    <button class="biz_home_btns" ng-click="mc.currentDD()">Current Deals</button>
+    <br>
+    <div ng-show="mc.currentDealDiv">
         <span id="current_info"></span>
-        <span id="redeem_screen"></span>
-        <button class="biz_home_btns" ng-click="toShow='exit_screen'">Close</button>
+        <button class="biz_home_btns" ng-click="mc.currentDealClose()">Close</button>
     </div>
     <br>
     <!-- display/update business info ------------------------------------------------------------------------------>
-    <button class="biz_home_btns" ng-click="toShow='biz_info'" onclick="displayData()">View/Update Data</button>
-    <div ng-show="toShow=='biz_info'" id="biz_info" class="info_display">
-        <span class="info_display" id="bizName"></span>
+    <button class="biz_home_btns" ng-click="mc.showDD()">View/Update Data</button>
+    <div ng-show="mc.updateDealDiv" id="bi_info">
+        <span id="bizName"></span>
         <br>
         <span class="info_display" id="street_address"></span>
         <br>
@@ -54,45 +53,32 @@
         <br>
         <span id="change_confirmed"></span>
         <div id="edit_biz_info" ng-show="edit">
-
-            <input type="text" id="biz_name"  placeholder="Business Name">
-            <input class="edit" type="button" value="Submit"
-                   onclick="updateData(document.getElementById('biz_name').value, 'biz_name')">
             <br>
-            <input type="text" id="street"  placeholder="Street Address">
-            <input class="edit" type="button" value="Submit"
-                   onclick="updateData(document.getElementById('street').value, 'street')">
+            Name:<input type="text" id="biz_name" ng-model="nameUp">
+            <input class="edit" type="button" value="Submit">
             <br>
-            <input type="text" id="city"  placeholder="City">
-            <input class="edit" type="button" value="Submit"
-                   onclick="updateData(document.getElementById('city').value, 'city')">
+            Street:<input type="text" id="street" ng-model="streetUp">
+            <input class="edit" type="button" value="Submit">
             <br>
-            <input type="text" id="state"  placeholder="State">
-            <input class="edit" type="button" value="Submit"
-                   onclick="updateData(document.getElementById('state').value, 'state')">
+            City: <input type="text" id="city" ng-model="cityUp">
+            <input class="edit" type="button" value="Submit">
             <br>
-            <input type="text" id="zip"  placeholder="Zip">
-            <input class="edit" type="button" value="Submit"
-                   onclick="updateData(document.getElementById('zip').value, 'zip')">
+            State: <input type="text" id="state" ng-model="stateUp">
+            <input class="edit" type="button" value="Submit">
             <br>
-            <input type="text" id="phone" placeholder="Phone Number">
-            <input class="edit" type="button" value="Submit"
-                   onclick="updateData(document.getElementById('phone').value, 'phone')">
+            Zip: <input type="text" id="zip" ng-model="zipUp">
+            <input class="edit" type="button" value="Submit">
             <br>
-            <input type="text" id="email" placeholder="Email">
-            <input class="edit" type="button" value="Submit"
-                   onclick="updateData(document.getElementById('phone').value, 'email')">
+            Phone: <input type="text" id="phone" ng-model="phoneUp">
+            <input class="edit" type="button" value="Submit">
         </div>
-        <button class="biz_home_btns" ng-click="toShow='exit_screen'" onclick="">Close</button>
+        <button class="exit_button" ng-click="mc.updateClose()">Close</button>
+
     </div>
 </main>
-
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="http://code.angularjs.org/1.3.15/angular-route.js"></script>
-<script src="https://www.gstatic.com/firebasejs/3.5.0/firebase.js"></script>
-<script src="biz_home.js"></script>
+<script src="dealApp.js"></script>
+<script src="script.js"></script>
+<script src="mainController.js"></script>
 </body>
 </html>
 

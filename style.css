@@ -48,6 +48,15 @@ button {
     color: darkred;
 }
 
+.redeemBtn {
+    color: white;
+    background-color: darkred;
+    padding: 0;
+    font-size: .8em;
+    margin-left: 5%;
+}
+
+
 #distance1, #distance3, #distance5 {
     height: 100%;
     width: 20%;
@@ -305,9 +314,13 @@ button {
     color: black;
 }
 
+#current_info {
+    font-size: 1.5em;
+}
+
 .info_display {
 line-height: 70%;
-    font-size: .8em
+    font-size: .8em;
 }
 
 #newDealSubmit,
@@ -422,15 +435,6 @@ input[type='checkbox']:checked {
     height: 70%;
     color: black;
 }
-
-#redeemBtn {
-    color: white;
-    background-color: darkred;
-    padding: 0;
-    font-size: .8em;
-    margin-left: 5%;
-}
-
 
 #redeem_screen {
     color: darkred;
