@@ -3,6 +3,7 @@
 <head>
     <title></title>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Eczar:700" rel="stylesheet">
 </head>
 <body ng-app="ngAnimate">
 <header>
@@ -20,7 +21,7 @@
                        document.getElementById('newDeal').value,
                        document.getElementById('newDealQty').value
                )">
-        <button class="biz_home_btns" ng-click="toShow='exit_screen'" onclick="location.reload();">Close</button>
+        <button class="biz_home_btns" ng-click="toShow='exit_screen'" onclick="">Close</button>
         <br>
         <span id="new_info"></span>
     </div>
@@ -31,7 +32,7 @@
     <div ng-show="toShow=='current'">
         <span id="current_info"></span>
         <span id="redeem_screen"></span>
-        <button class="biz_home_btns" ng-click="toShow='exit_screen'" onclick="location.reload();">Close</button>
+        <button class="biz_home_btns" ng-click="toShow='exit_screen'">Close</button>
     </div>
     <br>
     <!-- display/update business info ------------------------------------------------------------------------------>
@@ -81,7 +82,7 @@
             <input class="edit" type="button" value="Submit"
                    onclick="updateData(document.getElementById('phone').value, 'email')">
         </div>
-        <button class="biz_home_btns" ng-click="toShow='exit_screen'" onclick="location.reload();">Close</button>
+        <button class="biz_home_btns" ng-click="toShow='exit_screen'" onclick="">Close</button>
     </div>
 </main>
 <footer></footer>

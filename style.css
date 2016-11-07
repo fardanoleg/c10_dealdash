@@ -3,7 +3,8 @@ body {
     width: 100vw;
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
+    font-family: 'Eczar', sans-serif;
+
 }
 
 header {
@@ -48,7 +49,7 @@ button {
 
 #distance1, #distance3, #distance5 {
     height: 100%;
-    width: 23%;
+    width: 20%;
     margin: 0;
     padding: 0;
     border-style: 1em solid black;
@@ -56,9 +57,13 @@ button {
 
 #distanceRand, #distanceCustom {
     height: 90%;
-    width: 12.5%;
+    width: 17%;
     margin: 0;
     padding: 0;
+}
+
+#distanceCustom {
+    font-size: 2em;
 }
 
 #businesses {
@@ -117,15 +122,19 @@ button {
 }
 
 #frontMain {
-    background-color: lightblue;
+    background-color: white;
 }
 
 #frontHeader {
     height: 17%;
+    line-height: 90%;
+    background-color: white;
 }
 
 #frontFooter {
-    height: 3%
+    height: 3%;
+    background-color: darkred;
+    color: white;
 }
 
 .buttons {
@@ -292,7 +301,7 @@ button {
 }
 
 .info_display {
-
+line-height: 70%;
     font-size: .8em
 }
 
@@ -436,21 +445,41 @@ input[type='checkbox']:checked {
     width: 60%;
 }
 
+#loginDiv span {
+    color: darkred;
+}
+
 #buz_body {
     height: 100vh;
     width: 100vw;
-    background-color: lavender;
+    background-color: white;
 
 }
 
+.buttonSign {
+    background-color: white;
+    color: darkred;
+    border: none;
+    text-decoration: underline;
+    font-weight: bold;
+    border-radius: 5%;
+}
 
+.buttonSign span {
+    border: 1px solid darkred;
+    color: white;
+}
 
+#buz_body img {
+    height: 100%;
+    -webkit-transform: rotateZ(90deg); /* Safari */
+    transform: rotateZ(90deg);
+}
 
-
-
-
-
-
+#sign_up {
+    background-color: white;
+    color: darkred;
+}
 
 
 
