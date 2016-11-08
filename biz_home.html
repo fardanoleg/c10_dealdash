@@ -37,14 +37,15 @@
         </div>
         </span>
 
-        <button class="biz_home_btns" ng-click="mc.currentDealClose()">Close</button><br>
-        <span id="redeem_info" ng-show="mc.redeemInfo" ng-repeat ="index in mc.currentIndex()">{{index.redeemString}}</span>
+        <button class="biz_home_btns" ng-click="mc.currentDealClose()">Close</button>
+        <br>
+        <span id="redeem_info" ng-show="mc.redeemInfo">{{mc.currentIndex().redeemString}}</span>
     </div>
     <br>
     <!-- display/update business info ------------------------------------------------------------------------------>
     <button class="biz_home_btns" ng-click="mc.showDD()">View/Update Data</button>
-    <div ng-show="mc.updateDealDiv" id="bi_info">
-        <span id="bizName"></span>
+    <div ng-show="mc.updateDealDiv">
+        <span id="bizName">{{mc.businessObj.name}}</span>
         <br>
         <span id="street_address"></span>
         <br>

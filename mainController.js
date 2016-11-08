@@ -2,7 +2,7 @@ app.controller("mainController", function (myFactory, $log, $scope) {
     console.log('mainController  Triggered');
     var self = this;
     this.dealData = null;
-
+    // this.businessObj = {};
     this.indexRedeem = null;
     this.current = [];
     this.userName = null;
@@ -17,6 +17,10 @@ app.controller("mainController", function (myFactory, $log, $scope) {
     this.signUpp = function () {
         console.log("running signUPP");
 
+    };
+    this.buz_obj = function () {
+        console.log("businessObj clicked");
+        return self.businessObj
     };
     this.submitClicked = function () {
         console.log("submitClicked");
@@ -36,6 +40,17 @@ app.controller("mainController", function (myFactory, $log, $scope) {
         console.log("email: ", email);
         var password = $scope.password;
         console.log("password: ", password);
+        // self.businessObj = {
+        //     name: name,
+        //     state: state,
+        //     city: city,
+        //     zip: zip,
+        //     street: street,
+        //     phone: phone,
+        //     email: email,
+        //     password: password
+        // };
+        // console.log("businessObj: ", self.businessObj);
         myFactory.createAccount(name, street, city, state, zip, phone, email, password);
 
     };
@@ -43,7 +58,11 @@ app.controller("mainController", function (myFactory, $log, $scope) {
         console.log("RUNNNNNING");
         myFactory.newDealDiv = true;
     };
-
+    this.displayData = function () {
+    myFactory.displayData().then(function(snapshot){
+        console.log("snapshot is: ", snapshot);
+    })
+    };
     this.currentDD = function () {
         self.current = [];
         myFactory.currentDealUp().then(function (snapshot) {
@@ -81,10 +100,9 @@ app.controller("mainController", function (myFactory, $log, $scope) {
         return a
     }
     this.showDD = function () {
-        console.log("running show display: ");
+        console.log("running show display: ", self.businessObj);
         myFactory.updateDealDiv = true;
     };
-this.
     this.newDeal = function () {
         var qty = parseInt($scope.quantityInput);
         console.log("quantity: ", qty);
@@ -136,7 +154,7 @@ this.
     });
     Object.defineProperty(this, "updateDealDiv", {
         get: function () {
-            console.log("updateDealDiv clicked");
+            console.log("update Deal Div clicked");
             return myFactory.updateDealDiv;
         }
     });

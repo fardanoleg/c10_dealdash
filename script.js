@@ -110,7 +110,6 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
 //function shows the business its deals currently in effect
     server.currentDealUp = function () {
         console.log("current Deal Up running")
-        var current = [];
         var query = firebase.database().ref("biz/_test/deals/").orderByKey();
         return query.once("value");
     };
