@@ -484,8 +484,8 @@ input[type='checkbox']:checked {
 }
 
 #gears {
-    -webkit-transform: rotateZ(90deg); /* Safari */
-    transform: rotateZ(90deg); /* Standard syntax */
+    -webkit-transform: rotateZ(90deg);
+    transform: rotateZ(90deg);
 }
 
 #control_panel_header {
