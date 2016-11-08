@@ -20,10 +20,12 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
     server.confirmWindow = false;  //flag for ngHide/ngShow
     server.approveWindow = true;
     server.newDealDiv = false;
+    server.redeemInfo = false;
     server.newDealClose = false;
     server.currentDealDiv = false;
     server.updateDealDiv = false;
     server.winnerWindow = false;
+    server.btnRedeem = false;
     server.newWindow = false;
     server.selectedDealName = {};   //objects for passing the information from the database
     server.selectedDealAdress = {};
@@ -107,20 +109,11 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
 
 //function shows the business its deals currently in effect
     server.currentDealUp = function () {
+        console.log("current Deal Up running")
         var current = [];
         var query = firebase.database().ref("biz/_test/deals/").orderByKey();
-        query.once("value")
-            .then(function (snapshot) {
-                snapshot.forEach(function (childSnapshot) {
-                    var childData = childSnapshot.val();
-                    console.log("deal: " + childData.deal + " / code: " + childSnapshot.key);
-                    // var modCode = childSnapshot.key.substring(1);
-                    current.push(childData.deal + "<button class='redeemBtn' ng-click='server.redeem($index)'>Redeem</button><br>");
-                    document.getElementById("current_info").innerHTML = "Current Deals:<br> " + current;
-                });
-            });
+        return query.once("value");
     };
-
 //updates function reads the data stored in firebase and displays it on screen.
 //Changes to the business' info are displayed in real-time.
 //     var updates = {};
@@ -145,23 +138,6 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
         document.getElementById('change_confirmed').innerHTML = "Update Confirmed: " + newInfo + "<br>";
         document.getElementById(field).value = "";
     };
-
-    // server.redeem = function () {
-    //     var current = [];
-    //     var query = firebase.database().ref("biz/_test/deals/").orderByKey();
-    //     query.once("value")
-    //         .then(function (snapshot) {
-    //             snapshot.forEach(function (childSnapshot) {
-    //                 var childData = childSnapshot.val();
-    //                 console.log("deal: " + childData.deal + " / code: " + childSnapshot.key);
-    //
-    //                 current.push(childData.deal + "<button class='redeemBtn' >Redeem</button><br>");
-    //                 document.getElementById("current_info").innerHTML = "Current Deals:<br> " + current;
-    //             });
-    //         });
-    // };
-
-
     server.initMap = function () {   //init map at the beginning while loading(need to be changed later)
         var map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 0, lng: 0},

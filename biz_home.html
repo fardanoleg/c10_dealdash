@@ -29,8 +29,16 @@
     <button class="biz_home_btns" ng-click="mc.currentDD()">Current Deals</button>
     <br>
     <div ng-show="mc.currentDealDiv">
-        <span id="current_info"></span>
-        <button class="biz_home_btns" ng-click="mc.currentDealClose()">Close</button>
+        <span id="current_info">
+        <div ng-repeat="deal in mc.current">
+            {{deal.deal}}
+            <button class='redeemBtn' ng-show="mc.btnRedeem" ng-click="mc.redeemButton($index)">Redeem</button>
+            <br>
+        </div>
+        </span>
+
+        <button class="biz_home_btns" ng-click="mc.currentDealClose()">Close</button><br>
+        <span id="redeem_info" ng-show="mc.redeemInfo" ng-repeat ="index in mc.currentIndex()">{{index.redeemString}}</span>
     </div>
     <br>
     <!-- display/update business info ------------------------------------------------------------------------------>
@@ -70,7 +78,7 @@
         </div>
         <button class="exit_button" ng-click="mc.updateClose()">Close</button>
     </div>
-    <div ng-show="toShow=='exit_screen'" id="biz_info"></div>
+    <div ng-show="mc.updateDealDiv" id="biz_info"></div>
     <br>
 </main>
 <footer></footer>

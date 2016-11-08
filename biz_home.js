@@ -63,7 +63,7 @@ var newDeal = function (deal, qty) {
     //conditional checks to make sure the qty is a number between 1-10
     if (qty > 0 && qty < 11) {
         var dealMsg = {
-            deal
+            deal:deal
         };
         //loop that send the deal to firebase depending on the qty entered, i.e. qty of 2 = deal generated twice;
         for (var i = 0; i <= qty - 1; i++) {

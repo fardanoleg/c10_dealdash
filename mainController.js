@@ -1,6 +1,10 @@
 app.controller("mainController", function (myFactory, $log, $scope) {
     console.log('mainController  Triggered');
     var self = this;
+    this.dealData = null;
+
+    this.indexRedeem = null;
+    this.current = [];
     this.userName = null;
     this.passwordName = null;
     this.signInn = function () {
@@ -41,17 +45,46 @@ app.controller("mainController", function (myFactory, $log, $scope) {
     };
 
     this.currentDD = function () {
-        myFactory.currentDealUp();
+        self.current = [];
+        myFactory.currentDealUp().then(function (snapshot) {
+            console.log('Snapshot is: ', snapshot.val());
+            $scope.$apply(function () {
+                self.dealData = snapshot.val();
+                console.log("check deal data array: ", self.dealData);
+                for (var key in self.dealData) {
+                    var deal = self.dealData[key];
+                    console.log("deal: ", deal);
+                    var temp = key;
+                    var code = temp.substr(15);
+                    console.log("code: ", code);
+                    deal.redeemString = code;
+                    console.log(deal);
+                    self.current.push(deal);
+                    console.log(self.current);
+
+                }
+                myFactory.btnRedeem = true;
+            });
+        });
         myFactory.currentDealDiv = true;
     };
 
+    this.redeemButton = function (index) {
+        self.indexRedeem = index;
+        console.log("redemm button clicked: ", self.indexRedeem);
+        myFactory.redeemInfo = true;
+    };
+    this.currentIndex = function () {
+        console.log(" current index running");
+        var a = self.current[self.indexRedeem];
+        console.log("a: ", a);
+        return a
+    }
     this.showDD = function () {
         console.log("running show display: ");
         myFactory.updateDealDiv = true;
     };
-    this.redeemCont = function () {
-
-    }
+this.
     this.newDeal = function () {
         var qty = parseInt($scope.quantityInput);
         console.log("quantity: ", qty);
@@ -61,6 +94,7 @@ app.controller("mainController", function (myFactory, $log, $scope) {
     };
 
     this.currentDealClose = function () {
+        self.current = [];
         myFactory.currentDealDiv = false;
     };
 
@@ -106,10 +140,16 @@ app.controller("mainController", function (myFactory, $log, $scope) {
             return myFactory.updateDealDiv;
         }
     });
-    Object.defineProperty(this, "redeemCont", {
+    Object.defineProperty(this, "btnRedeem", {
         get: function () {
             console.log("redeem clicked");
-            return myFactory.redeem;
+            return myFactory.btnRedeem;
+        }
+    });
+    Object.defineProperty(this, "redeemInfo", {
+        get: function () {
+            console.log("redeemInfo clicked");
+            return myFactory.redeemInfo;
         }
     });
 });
