@@ -37,7 +37,7 @@
         </div>
         </span>
 
-        <button class="biz_home_btns" ng-click="mc.currentDealClose()">Close</button>
+        <button type="button" class="biz_home_btns" ng-click="mc.currentDealClose()">Close</button>
         <br>
         <span id="redeem_info" ng-show="mc.redeemInfo">{{mc.currentIndex().redeemString}}</span>
     </div>
@@ -45,37 +45,39 @@
     <!-- display/update business info ------------------------------------------------------------------------------>
     <button class="biz_home_btns" ng-click="mc.showDD()">View/Update Data</button>
     <div ng-show="mc.updateDealDiv">
-        <span id="bizName">{{mc.businessObj.name}}</span>
+        <span id="bizName">{{mc.dealDataObj.name}}</span>
         <br>
-        <span id="street_address"></span>
+        <span id="street_address">{{mc.dealDataObj.steet}}</span>
         <br>
-        <span id="city_name"></span>
-        <span id="state_of"></span>
-        <span id="zip_code"></span>
+        <span id="city_name">{{mc.dealDataObj.city}}</span>
+        <span id="state_of">{{mc.dealDataObj.state}}</span>
+        <span id="zip_code">{{mc.dealDataObj.zip}}</span>
         <br>
-        <span id="phone_num"></span><br>
-        <input type="checkbox" ng-model="edit" id="edit_checkbox"><em>edit</em>
+        <span id="phone_num">{{mc.dealDataObj.phone}}</span><br>
+
+        <input type="checkbox" ng-model="edit" id="edit_checkbox" ng-click="mc.inputChecked()"><em id="edit">EDIT</em>
         <br>
         <span id="change_confirmed"></span>
         <div id="edit_biz_info" ng-show="edit">
             <br>
-            Name:<input type="text" id="biz_name" ng-model="nameUp">
-            <input class="edit" type="button" value="Submit">
-            <br>
-            Street:<input type="text" id="street" ng-model="streetUp">
-            <input class="edit" type="button" value="Submit">
-            <br>
-            City: <input type="text" id="city" ng-model="cityUp">
-            <input class="edit" type="button" value="Submit">
-            <br>
-            State: <input type="text" id="state" ng-model="stateUp">
-            <input class="edit" type="button" value="Submit">
-            <br>
-            Zip: <input type="text" id="zip" ng-model="zipUp">
-            <input class="edit" type="button" value="Submit">
-            <br>
-            Phone: <input type="text" id="phone" ng-model="phoneUp">
-            <input class="edit" type="button" value="Submit">
+            <div id="biz_name" class="items">Name: <input type="text" id="b_name" ng-model="nameUp">
+                <input class="edit" type="button" value="Submit" ng-click="mc.editClicked($event)">
+            </div>
+            <div id="street" class="items">Street: <input type="text" id="b_street" ng-model="streetUp">
+                <input class="edit" type="button" value="Submit" ng-click="mc.editClicked($event)">
+            </div>
+            <div id="city" class="items">City: <input type="text" id="b_city" ng-model="cityUp">
+                <input class="edit" type="button" value="Submit" ng-click="mc.editClicked($event)">
+            </div>
+            <div id="state" class="items">State: <input type="text" id="b_state" ng-model="stateUp">
+                <input class="edit" type="button" value="Submit" ng-click="mc.editClicked($event)">
+            </div>
+            <div id="zip" class="items">Zip: <input type="text" id="b_zip" ng-model="zipUp">
+                <input class="edit" type="button" value="Submit" ng-click="mc.editClicked($event)">
+            </div>
+            <div id="phone" class="items">Phone: <input type="text" id="b_phone" ng-model="phoneUp">
+                <input class="edit" type="button" value="Submit" ng-click="mc.editClicked($event)">
+            </div>
         </div>
         <button class="exit_button" ng-click="mc.updateClose()">Close</button>
     </div>

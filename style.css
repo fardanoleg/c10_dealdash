@@ -32,8 +32,8 @@ footer {
 
 #distanceCustom,
 button {
-    font-size: 1em;
-    padding: 0;
+    font-size: 2em;
+
     background-color: lavender;
     border-radius: 5%;
     font-weight: bold;
@@ -336,11 +336,11 @@ button {
 
 input[type='checkbox'] {
     -webkit-appearance: none;
-    width: 30px;
-    height: 30px;
+    width: 4em;
+    height: 4em;
     background: white;
-    border-radius: 5px;
-    border: 2px solid black;
+    border-radius: 1em;
+    border: 1px solid black;
     margin-left: 10%;
 }
 
@@ -372,8 +372,7 @@ input[type='checkbox']:checked {
 #create_account #street {
     width: 80%;
     margin-bottom: 5%;
-    height: 10%;
-    background-color: yellow;
+
 }
 
 #create_account #city {
@@ -439,6 +438,19 @@ input[type='checkbox']:checked {
     color: black;
 }
 
+#bizName, #street_adress, #city_name, #state_of, #zip_code, #phone_num {
+    font-weight: bold;
+    font-size: 2em;
+    color: black;
+
+}
+
+.items {
+    font-size: 2em;
+    height: 16%;
+    width: 78%;
+    display: block;
+}
 
 
 

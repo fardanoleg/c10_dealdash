@@ -1,6 +1,7 @@
 app.factory("myFactory", function ($http, $log, $q, $timeout) {
     var server = {};
     var map;
+    var DEAL = null;
     var indexString = null;
     $log.info(server.dealArray);
 
@@ -38,6 +39,7 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
     server.selectedDealTime = {};
     server.selectedDealDistance = {};
     server.selectedDealDirections = {};
+    server.selectedDealDisplay = {};
 
     var uluru = {         //user location
         lat: null,
@@ -82,7 +84,8 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
     };
 
     server.newDeal = function (qty, deal) {
-        console.log(deal);
+        DEAL = qty;
+        console.log(DEAL);
         console.log(qty);
         console.log(typeof(qty));
         //conditional checks to make sure the qty is a number between 1-10
@@ -109,34 +112,47 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
 
 //function shows the business its deals currently in effect
     server.currentDealUp = function () {
-        console.log("current Deal Up running")
+        console.log("current Deal Up running");
         var query = firebase.database().ref("biz/_test/deals/").orderByKey();
         return query.once("value");
     };
 //updates function reads the data stored in firebase and displays it on screen.
 //Changes to the business' info are displayed in real-time.
-//     var updates = {};
+
     server.displayData = function () {
-        console.log("redeeeem");
+        console.log("display data running");
+        var defer = $q.defer();
         fbRef.ref('biz/_test').on('value', function (snapshot) {
-            updates = snapshot.val();
-            document.getElementById("bizName").innerHTML = updates.biz_name;
-            document.getElementById("street_address").innerHTML = updates.street;
-            document.getElementById("city_name").innerHTML = updates.city;
-            document.getElementById("state_of").innerHTML = updates.state;
-            document.getElementById("zip_code").innerHTML = updates.zip;
-            document.getElementById("phone_num").innerHTML = updates.phone;
-            updates = {};
+            console.log("retrive data running");
+            defer.resolve(snapshot);
         });
+        return defer.promise
     };
+//     var updates = {};
+    // fbRef.ref('biz/_test').on('value', function (snapshot) {
+    // updates = snapshot.val();
+    // document.getElementById("bizName").innerHTML = updates.biz_name;
+    // document.getElementById("street_address").innerHTML = updates.street;
+    // document.getElementById("city_name").innerHTML = updates.city;
+    // document.getElementById("state_of").innerHTML = updates.state;
+    // document.getElementById("zip_code").innerHTML = updates.zip;
+    // document.getElementById("phone_num").innerHTML = updates.phone;
+    // updates = {};
+    // });
+    // };
 
 //updateData takes in two parameters in order to update the appropriate field in firebase with the new info.
-    var updateData = function (newInfo, field) {
+    server.updateData2 = function (newInfo, field) {
+        console.log(" update data2 running");
+        var updates = {};
         updates['biz/_test/' + field] = newInfo;
+        console.log("updtaes: ", updates);
         fbRef.ref().update(updates);
-        document.getElementById('change_confirmed').innerHTML = "Update Confirmed: " + newInfo + "<br>";
-        document.getElementById(field).value = "";
+        // document.getElementById('change_confirmed').innerHTML = "Update Confirmed: " + newInfo + "<br>";
+        // document.getElementById(field).value = "";
     };
+
+
     server.initMap = function () {   //init map at the beginning while loading(need to be changed later)
         var map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 0, lng: 0},
@@ -304,6 +320,7 @@ app.factory("myFactory", function ($http, $log, $q, $timeout) {
             });
 
             google.maps.event.addListener(marker, 'click', function () {      //event will trigger when the marker will be clicked
+
                 console.log("Listening: ", dealKey);
                 server.newWindow = true;
                 $timeout(function () {

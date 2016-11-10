@@ -2,7 +2,7 @@ app.controller("mainController", function (myFactory, $log, $scope) {
     console.log('mainController  Triggered');
     var self = this;
     this.dealData = null;
-    // this.businessObj = {};
+    this.dealDataObj = {};
     this.indexRedeem = null;
     this.current = [];
     this.userName = null;
@@ -14,14 +14,41 @@ app.controller("mainController", function (myFactory, $log, $scope) {
         self.passwordName = $scope.passwordName;
         console.log("password: ", self.passwordName);
     };
+
     this.signUpp = function () {
         console.log("running signUPP");
 
     };
+
     this.buz_obj = function () {
         console.log("businessObj clicked");
         return self.businessObj
     };
+
+    this.inputChecked = function () {
+
+    };
+
+    this.editClicked = function (event) {
+        var updates = {};
+        var field = event.target.parentElement.id;
+        console.log("nameClicked: ", field);
+        var name = $scope.nameUp;
+        console.log("name: ", name);
+        myFactory.updateData2(name, field);
+
+        // state = $scope.stateUp;
+        // console.log("state: ", state);
+        // city = $scope.cityUp;
+        // console.log("city: ", city);
+        // zip = $scope.zipUp;
+        // console.log("zip: ", zip);
+        // street = $scope.streetUp;
+        // console.log("street: ", street);
+        // phone = $scope.phoneUp;
+        // console.log("phone: ", phone);
+    };
+
     this.submitClicked = function () {
         console.log("submitClicked");
         var name = $scope.biz_name;
@@ -40,17 +67,7 @@ app.controller("mainController", function (myFactory, $log, $scope) {
         console.log("email: ", email);
         var password = $scope.password;
         console.log("password: ", password);
-        // self.businessObj = {
-        //     name: name,
-        //     state: state,
-        //     city: city,
-        //     zip: zip,
-        //     street: street,
-        //     phone: phone,
-        //     email: email,
-        //     password: password
-        // };
-        // console.log("businessObj: ", self.businessObj);
+
         myFactory.createAccount(name, street, city, state, zip, phone, email, password);
 
     };
@@ -58,11 +75,7 @@ app.controller("mainController", function (myFactory, $log, $scope) {
         console.log("RUNNNNNING");
         myFactory.newDealDiv = true;
     };
-    this.displayData = function () {
-    myFactory.displayData().then(function(snapshot){
-        console.log("snapshot is: ", snapshot);
-    })
-    };
+
     this.currentDD = function () {
         self.current = [];
         myFactory.currentDealUp().then(function (snapshot) {
@@ -93,15 +106,32 @@ app.controller("mainController", function (myFactory, $log, $scope) {
         console.log("redemm button clicked: ", self.indexRedeem);
         myFactory.redeemInfo = true;
     };
+
     this.currentIndex = function () {
         console.log(" current index running");
         var a = self.current[self.indexRedeem];
         console.log("a: ", a);
         return a
-    }
+    };
+
     this.showDD = function () {
-        console.log("running show display: ", self.businessObj);
+        console.log("running show display");
         myFactory.updateDealDiv = true;
+        // myFactory.displayData()
+        console.log("get data from firebase");
+        myFactory.displayData().then(function (snapshot) {
+            console.log("snapshot to display: ", snapshot.val());
+            var data = snapshot.val();
+            console.log("data: ", data);
+            self.dealDataObj = {
+                name: data.biz_name,
+                street: data.street,
+                city: data.city,
+                state: data.state,
+                zip: data.zip,
+                phone: data.phone
+            }
+        });
     };
     this.newDeal = function () {
         var qty = parseInt($scope.quantityInput);
@@ -113,7 +143,9 @@ app.controller("mainController", function (myFactory, $log, $scope) {
 
     this.currentDealClose = function () {
         self.current = [];
+        myFactory.redeemInfo = false;
         myFactory.currentDealDiv = false;
+
     };
 
     this.newDealClose = function () {
